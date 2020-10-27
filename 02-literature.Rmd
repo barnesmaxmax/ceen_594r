@@ -1,6 +1,6 @@
 # Literature Review
 
-Here is a review of existing methods.
+Here is a review of existing methods:
 
 ## Overview
 The resilience and connectivity of transport networks are a long-studied topic within transportation engineering in both theoretical and practical contexts. Within this long history however, there is variability in how scholars define resiliency. There are three basic definitions that researchers have used:
