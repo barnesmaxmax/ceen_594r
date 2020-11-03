@@ -1,0 +1,56 @@
+# References
+
+Abdel-Rahim, A., Oman, P., Johnson, B. K., & Sadiq, R. A. (2007). Assessing surface transportation network component    criticality: A multi-layer graph-based approach. IEEE Conference on Intelligent Transportation Systems, Proceedings,   ITSC, 1000–1003. https://doi.org/10.1109/ITSC.2007.4357801
+AEM. (2017). I-15 Corridor Risk and Resilience Pilot Final Report. Retrieved from 
+  https://drive.google.com/file/d/1zdvibt2hHKG1hdmB--QtVD5Vvr87swW9/view
+Agarwal, J., Liu, M., & Blockley, D. (2011). A Systems Approach to Vulnerability Assessment. Vulnerability,             Uncertainty, and Risk, 230–237. https://doi.org/10.1061/41170(400)28
+Berdica, K. (2002). An introduction to road vulnerability: What has been done, is done and should be done. Transport    Policy, 9(2), 117–127. https://doi.org/10.1016/S0967- 070X(02)00011-2
+Bradley, J. (2007). Time period and risk measures in the general risk equation. Journal of Risk Research, 10(3),        355–369. https://doi.org/10.1080/13669870701252232
+Dong, X., Ben-Akiva, M. E., Bowman, J. L., & Walker, J. L. (2006). Moving from trip-based to activity-based measures    of accessibility. Transportation Research Part A: Policy and Practice, 40(2), 163–180.      
+  https://doi.org/10.1016/J.TRA.2005.05.002
+Ganin, A. A., Kitsak, M., Marchese, D., Keisler, J. M., Seager, T., & Linkov, I. (2017). Resilience and efficiency in   transportation networks. Science Advances, 3(12), 1–9. https://doi.org/10.1126/sciadv.1701079
+Georgia Department of Transportation. (2017). I-85 Bridge Collapse and Rebuild. 1–2. Retrieved from           
+  https://transops.s3.amazonaws.com/uploaded_files/NoCoe Case - I-85 Bridge Collapse 1b.pdf
+Geurs, K. T., & van Wee, B. (2004). Accessibility evaluation of land-use and transport strategies: Review and research
+  directions. Journal of Transport Geography. https://doi.org/10.1016/j.jtrangeo.2003.10.005
+Geurs, K., Zondag, B., de Jong, G., & de Bok, M. (2010). Accessibility appraisal of land- use/transport policy          strategies: More than just adding up travel-time savings. Transportation Research Part D: Transport and Environment,   15(7), 382–393. https://doi.org/10.1016/j.trd.2010.04.006
+Guze, S. (2015). Graph Theory Approach to Transportation Systems Design and Optimization.
+  TransNav, the International Journal on Marine Navigation and Safety of Sea Transportation, 8(4), 571–578.       
+  https://doi.org/10.12716/1001.08.04.12
+Hackl, J., & Adey, B. T. (2019). Estimation of traffic flow changes using networks in networks approaches. Applied      Network Science, 4(1). https://doi.org/10.1007/s41109-019-0139-y
+Hamedi, M., Eshragh, S., Franz, M., & Sekula, P. M. (2018). Analyzing Impact of I-85 Bridge Collapse on Regional        Travel in Atlanta (pp. 1–16). pp. 1–16.
+Handy, S. L., & Niemeier, D. A. (1997). Measuring Accessibility: An Exploration of Issues and Alternatives.             Environment and Planning A, 29(7), 1175–1194. https://doi.org/10.1068/a291175
+Ibrahim, S., Ammar, R., Rajasekaran, S., Lownes, N., Wang, Q., & Sharma, D. (2011). An efficient heuristic for          estimating transportation network vulnerability. Proceedings - IEEE Symposium on Computers and Communications,        1092–1098. https://doi.org/10.1109/ISCC.2011.5983988
+Ip, W. H., & Wang, D. (2011). Resilience and friability of transportation networks: Evaluation, analysis and            optimization. IEEE Systems Journal, 5(2), 189–198. https://doi.org/10.1109/JSYST.2010.2096670
+Jaller, M., González-Calderón, C. A., Yushimito, W. F., & Sánchez-Díaz, I. D. (2015). An investigation of the effects   of critical infrastructure on urban mobility in the city of
+  Medellín. International Journal of Critical Infrastructures, 11(3), 213–232.
+  https://doi.org/10.1504/IJCIS.2015.072158
+Levinson, D., & Zhu, S. (2010). Traffic Flow and Road User Impacts of the Collapse of the I- 35W Bridge. (July).        Retrieved from https://www.lrrb.org/PDF/201021.pdf
+Metropolitan Atlanta Rapid Transit Authority. (2018). 2018 Sustainability Report. Atlanta, Georgia.
+Metropolitan Atlanta Rapid Transit Authority. (2017). Popular Annual Financial Report. Atlanta, Georgia.
+Omer, M., Mostashari, A., & Nilchiani, R. (2013). Assessing resilience in a regional road-based transportation          network. International Journal of Industrial and Systems Engineering, 13(4), 389–408.        
+  https://doi.org/10.1504/IJISE.2013.052605
+Osei-Asamoah, A., & Lownes, N. E. (2014). Complex network method of evaluating resilience in surface transportation     networks. Transportation Research Record, 2467, 120–128. https://doi.org/10.3141/2467-13
+Peeta, S., Sibel Salman, F., Gunnec, D., & Viswanath, K. (2010). Pre-disaster investment decisions for strengthening a   highway network. Computers & Operations Research, 37(10), 1708–1719. https://doi.org/10.1016/J.COR.2009.12.006
+Rogers, C. D. F., Bouch, C. J., Williams, S., Barber, A. R. G., Baker, C. J., Bryson, J. R., ... Quinn, A. D. (2012).   Resistance and resilience - paradigms for critical local infrastructure. Proceedings of the Institution of Civil      Engineers: Municipal Engineer, 165(2), 73–84. https://doi.org/10.1680/muen.11.00030
+Schaper, D. (2017) ‘10 Years After Bridge Collapse, America is Still Crumbling’, NPR, 1 August, Available at:
+  https://www.npr.org/2017/08/01/540669701/10-years-after-bridge- collapse-america-is-still-crumbling (Accessed: 28     May 2020).
+Serulle, N. U., Heaslip, K., Brady, B., Louisell, W. C., & Collura, J. (2011). Resiliency of Transportation Network of   Santo Domingo, Dominican Republic. Transportation Research
+  Record: Journal of the Transportation Research Board, 2234(1), 22–30. https://doi.org/10.3141/2234-03
+Taylor, M. A. P. (2008). Critical transport infrastructure in urban areas: Impacts of traffic incidents assessed using   accessibility-based network vulnerability analysis. Growth and Change, 39(4), 593–616. 
+  https://doi.org/10.1111/j.1468-2257.2008.00448.x
+Vodák, R., Bíl, M., Svoboda, T., Křivánková, Z., Kubeček, J., Rebok, T., & Hliněný, P. (2019). A deterministic  
+  approach for rapid identification of the critical links in networks. PLoS ONE, 14(7), 1–18.     
+  https://doi.org/10.1371/journal.pone.0219658
+Winkler, C. (2016). Evaluating transport user benefits: Adjustment of logsum difference for constrained travel demand   models. Transportation Research Record, 2564, 118–126. https://doi.org/10.3141/2564-13
+Xie, F., & Levinson, D. (2011). Evaluating the effects of the I-35W bridge collapse on road- users in the twin cities   metropolitan region. Transportation Planning and Technology, 34(7), 691–703.  
+  https://doi.org/10.1080/03081060.2011.602850
+Xu, X., Chen, A., Jansuwan, S., Heaslip, K., & Yang, C. (2015). Modeling transportation network redundancy. 
+  Transportation Research Procedia, 9, 283–302. https://doi.org/10.1016/j.trpro.2015.07.016
+Zhang, W., & Wang, N. (2016). Resilience-based risk mitigation for road networks. Structural Safety, 62, 57–65.
+  https://doi.org/10.1016/j.strusafe.2016.06.003
+Zhang, X., Miller-Hooks, E., & Denny, K. (2015). Assessing the role of network topology in transportation network 
+  resilience. Journal of Transport Geography, 46, 35–45. https://doi.org/10.1016/j.jtrangeo.2015.05.006
+Zhu, S., Levinson, D., Liu, H. X., & Harder, K. (2010). The traffic and behavioral effects of the I-35W Mississippi 
+  River bridge collapse. Transportation Research Part A: Policy and Practice, 44(10), 771–784.
+  https://doi.org/10.1016/j.tra.2010.07.001

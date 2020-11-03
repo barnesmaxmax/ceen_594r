@@ -136,25 +136,3 @@ Ganin et al. (2017) attempts to investigate resiliency through a disruption of 5
 
 ## Summary
 The lessons learned from the events in Minneapolis and Atlanta demonstrate that when transportation networks are damaged or degraded by link failure, multiple changes result. Traffic diverts to other facilities and other modes, and some people make fundamental changes to their daily activity patterns, choosing new destinations or eliminating trips entirely. Numerous other researchers have identified methodologies to capture the effects, or at least the costs, of these potential changes in modeled crisis events. We are able to learn from these methodologies to create a methodology on a state-wide level.
-
-
-
->You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
-
->Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
-
->```{r nice-fig1, fig.cap='Here is a nice figure1!', out.width='80%', fig.asp=.75, fig.align='center'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
-```
-
->Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
-
->```{r nice-tab1, tidy=FALSE}
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
->```
-
->You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
