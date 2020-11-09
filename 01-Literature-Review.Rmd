@@ -127,7 +127,7 @@ Xu et al. (2015) develop network-based measures and computational methods to eva
 
 ## Changes in Accessibility
 Accessibility refers to the ease with which individuals can reach the destinations that matter to them; this is an abstract idea but one that has been quantified in numerous ways. Dong et al., (2006) provides a helpful framework for understanding various quantitative definitions of accessibility that we will simplify here. The most elementary definition of accessibility is whether a destination is within an isochrone, or certain distance. This measure is often represented as a count, e.g., the number of jobs reachable from a particular location within thirty minutes travel time by a particular mode. Mathematically,
-A_i=∑_j▒〖X_j I_ij 〗,where {█(I_ij=1 if d_ij<D@I_ij=0 if d_ij>D)┤
+$A_i=\sum_j$〖X_j I_ij 〗,where {█(I_ij=1 if d_ij<D@I_ij=0 if d_ij>D)┤
 where the accessibility A at point i is the sum of the all the jobs or other destinations X at other points j. I_ij is an indicator function equal to zero if the distance between the points d_ij is less than some asserted threshold (e.g., thirty minutes of travel time). By relaxing the assumption of a binary isochrone and instead using the distance directly, we can derive the so-called gravity model,
 A_i=∑_j▒〖X_j 〖f(d〗_ij)〗
 where the function f(d_ij) is often a negative exponential with a calibrated impedance coefficient. An extension of the gravity model is to use the logsum term of a multinomial logit destination choice model,
