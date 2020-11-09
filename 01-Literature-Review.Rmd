@@ -39,15 +39,17 @@ For the purpose of our study it is important to understand which threats AEM dec
 
 Once these threat layers were determined and the location of the threat-asset pairs along I-15 were found, AEM could then continue their analysis. This consisted of: gathering characteristic data for each asset (length, width, depth, condition, etc.), determining a replacement cost for each asset, establishing an estimated service life for each asset, estimating (if not known) the design standard for each asset, establishing which magnitudes of each threat were to be analyzed, and gathering information on the likelihood of occurrence of each magnitude of each threat. These steps are further described in their paper using multiple different threat locations.
 
-The AEM R&R report provides a good template going forward for identifying links at risk, following the first definition of a resilient transportation network. The report also attempts to identify which links at risk are most critical, assessing a “criticality” score to the network based on the five data elements and categories given in Table 1. A key observation of these criticality scores is that they do not accommodate alternate routes that the traffic could use were the link to become unavailable. In identifying the systemic resiliency of highway facilities – as implied by the third definition of resiliency – requires considering these alternate routes.
+The AEM R&R report provides a good template going forward for identifying links at risk, following the first definition of a resilient transportation network. The report also attempts to identify which links at risk are most critical, assessing a “criticality” score to the network based on the five data elements and categories given in Table \@ref(tab:criticality). A key observation of these criticality scores is that they do not accommodate alternate routes that the traffic could use were the link to become unavailable. In identifying the systemic resiliency of highway facilities – as implied by the third definition of resiliency – requires considering these alternate routes.
 
-Table 1. AEM Criticality Score Assignment
-Criteria	Very Low impact	Low Impact	Moderate Impact	High Impact	Very High Impact
-AADT	<= 1,145	1,146-3,275	3276-8,285	8,286-17,455	>17,455
-Truck AADT	0	1-494	495-1,881	1,882-4,794	>4,794
-AASHTO Roadway Classification	Minor Collectors	Major Collectors	Minor Arterials	Principal Arterials	Interstate Expressway
-Tourism Traffic ($M)	<19.89	19.90-39.66	39.67-101.13	101.14-505.32	>505.32
-Maintenance Crew Distance (Miles)	<70	71-84	85-102	103-124	>124
+```{r criticality}
+tibble(
+  Criteria = c("AADT", "Truck AADT", "AASHTO Roadway Classification", 
+               "Tourism Traffic", "Maintenance Crew")
+) %>%
+  knitr::kable(caption = "AEM Criticality Score Assignment")
+
+```
+
 
 ## Lessons Learned from Crisis Events
 Two major crisis events in the last fifteen years have given researchers an important opportunity to study what happens to transportation behavior when critical links are suddenly disabled for an extended period of time. These events are the collapse of the I-35W bridge collapse in Minneapolis, Minnesota and the I-85 / Piedmont Road fire and bridge collapse in Atlanta, Georgia.
