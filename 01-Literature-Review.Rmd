@@ -9,13 +9,22 @@ library(knitr)
 
 # Literature Review
 
-Here is a review of existing methods:
+ > You need to cut this down into a paper-length review.
 
-## Overview
 The resilience and connectivity of transport networks are a long-studied topic within transportation engineering in both theoretical and practical contexts. Within this long history however, there is variability in how scholars define resiliency. There are three basic definitions that researchers have used:
-A. Resilience through Resistance: Resilient transportation networks have few and manageable vulnerabilities. This is typically addressed through robust facility-level engineering and risk management (e.g., Bradley, 2007).
-B. Resilience through Recovery: Resilient transportation networks are able to be repaired and returned to normal service without inordinate delay. This is accomplished through effective resource allocation and incident management (e.g., Zhang and Wang, 2016).
-C. Resilience through Operability in Crisis: Resilient transport networks are able to operate effectively with damaged or unusable links. It is this definition that is most relevant in the context of this study.
+
+  - Resilience through Resistance: Resilient transportation networks have few and
+  manageable vulnerabilities. This is typically addressed through robust
+  facility-level engineering and risk management (e.g., Bradley, 2007). 
+  
+  - Resilience through Recovery: Resilient transportation networks are able to be
+  repaired and returned to normal service without inordinate delay. This is
+  accomplished through effective resource allocation and incident management
+  (e.g., Zhang and Wang, 2016). 
+
+  - Resilience through Operability in Crisis: Resilient transport networks are
+  able to operate effectively with damaged or unusable links. It is this
+  definition that is most relevant in the context of this study.
 
 These definitions are not entirely mutually exclusive, and many researchers apply more than one definition in their work. For example, knowing where systemically critical or vulnerable links are will help in allocating maintenance resources. At the same time, the approach to identifying critical facilities implied by one of these definitions is not always compatible with the other definitions and making distinctions between them is important (Rogers et al, 2012). A bridge highly vulnerable to failure may be located on a little-traveled and systemically unimportant side street. The motivation of this research is to identify systemically critical facilities, and therefore we primarily consider literature using the third definition.
 
@@ -30,15 +39,17 @@ For the purpose of our study it is important to understand which threats AEM dec
 
 Once these threat layers were determined and the location of the threat-asset pairs along I-15 were found, AEM could then continue their analysis. This consisted of: gathering characteristic data for each asset (length, width, depth, condition, etc.), determining a replacement cost for each asset, establishing an estimated service life for each asset, estimating (if not known) the design standard for each asset, establishing which magnitudes of each threat were to be analyzed, and gathering information on the likelihood of occurrence of each magnitude of each threat. These steps are further described in their paper using multiple different threat locations.
 
-The AEM R&R report provides a good template going forward for identifying links at risk, following the first definition of a resilient transportation network. The report also attempts to identify which links at risk are most critical, assessing a “criticality” score to the network based on the five data elements and categories given in Table 1. A key observation of these criticality scores is that they do not accommodate alternate routes that the traffic could use were the link to become unavailable. In identifying the systemic resiliency of highway facilities – as implied by the third definition of resiliency – requires considering these alternate routes.
+The AEM R&R report provides a good template going forward for identifying links at risk, following the first definition of a resilient transportation network. The report also attempts to identify which links at risk are most critical, assessing a “criticality” score to the network based on the five data elements and categories given in Table \@ref(tab:criticality). A key observation of these criticality scores is that they do not accommodate alternate routes that the traffic could use were the link to become unavailable. In identifying the systemic resiliency of highway facilities – as implied by the third definition of resiliency – requires considering these alternate routes.
 
-Table 1. AEM Criticality Score Assignment
-Criteria	Very Low impact	Low Impact	Moderate Impact	High Impact	Very High Impact
-AADT	<= 1,145	1,146-3,275	3276-8,285	8,286-17,455	>17,455
-Truck AADT	0	1-494	495-1,881	1,882-4,794	>4,794
-AASHTO Roadway Classification	Minor Collectors	Major Collectors	Minor Arterials	Principal Arterials	Interstate Expressway
-Tourism Traffic ($M)	<19.89	19.90-39.66	39.67-101.13	101.14-505.32	>505.32
-Maintenance Crew Distance (Miles)	<70	71-84	85-102	103-124	>124
+```{r criticality}
+tibble(
+  Criteria = c("AADT", "Truck AADT", "AASHTO Roadway Classification", 
+               "Tourism Traffic", "Maintenance Crew")
+) %>%
+  knitr::kable(caption = "AEM Criticality Score Assignment")
+
+```
+
 
 ## Lessons Learned from Crisis Events
 Two major crisis events in the last fifteen years have given researchers an important opportunity to study what happens to transportation behavior when critical links are suddenly disabled for an extended period of time. These events are the collapse of the I-35W bridge collapse in Minneapolis, Minnesota and the I-85 / Piedmont Road fire and bridge collapse in Atlanta, Georgia.
@@ -116,7 +127,7 @@ Xu et al. (2015) develop network-based measures and computational methods to eva
 
 ## Changes in Accessibility
 Accessibility refers to the ease with which individuals can reach the destinations that matter to them; this is an abstract idea but one that has been quantified in numerous ways. Dong et al., (2006) provides a helpful framework for understanding various quantitative definitions of accessibility that we will simplify here. The most elementary definition of accessibility is whether a destination is within an isochrone, or certain distance. This measure is often represented as a count, e.g., the number of jobs reachable from a particular location within thirty minutes travel time by a particular mode. Mathematically,
-A_i=∑_j▒〖X_j I_ij 〗,where {█(I_ij=1 if d_ij<D@I_ij=0 if d_ij>D)┤
+$A_i=\sum_j$〖X_j I_ij 〗,where {█(I_ij=1 if d_ij<D@I_ij=0 if d_ij>D)┤
 where the accessibility A at point i is the sum of the all the jobs or other destinations X at other points j. I_ij is an indicator function equal to zero if the distance between the points d_ij is less than some asserted threshold (e.g., thirty minutes of travel time). By relaxing the assumption of a binary isochrone and instead using the distance directly, we can derive the so-called gravity model,
 A_i=∑_j▒〖X_j 〖f(d〗_ij)〗
 where the function f(d_ij) is often a negative exponential with a calibrated impedance coefficient. An extension of the gravity model is to use the logsum term of a multinomial logit destination choice model,
