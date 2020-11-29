@@ -1,0 +1,7 @@
+```{r}
+library(tidyverse)
+library(shiny)
+library(shinythemes)
+```
+
+# Applications
