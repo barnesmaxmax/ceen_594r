@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Methodology | Resiliency in Transportation Systems</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="description" content="Data analysis report prepared for Dr. Greg Macfarlane as part of the CEEN 594r curriculum." />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Methodology | Resiliency in Transportation Systems" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta property="og:description" content="Data analysis report prepared for Dr. Greg Macfarlane as part of the CEEN 594r curriculum." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 3 Methodology | Resiliency in Transportation Systems" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:description" content="Data analysis report prepared for Dr. Greg Macfarlane as part of the CEEN 594r curriculum." />
   
 
 <meta name="author" content="Max Barnes" />
 
 
-<meta name="date" content="2020-11-02" />
+<meta name="date" content="2020-11-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,70 @@
 
 
 
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -71,20 +135,19 @@
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Project Question</a></li>
 <li class="chapter" data-level="2" data-path="literature-review.html"><a href="literature-review.html"><i class="fa fa-check"></i><b>2</b> Literature Review</a><ul>
-<li class="chapter" data-level="2.1" data-path="literature-review.html"><a href="literature-review.html#overview"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
-<li class="chapter" data-level="2.2" data-path="literature-review.html"><a href="literature-review.html#identifying-critical-links-on-i-15"><i class="fa fa-check"></i><b>2.2</b> Identifying Critical Links on I-15</a></li>
-<li class="chapter" data-level="2.3" data-path="literature-review.html"><a href="literature-review.html#lessons-learned-from-crisis-events"><i class="fa fa-check"></i><b>2.3</b> Lessons Learned from Crisis Events</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="literature-review.html"><a href="literature-review.html#i-35-w-bridge-collapse"><i class="fa fa-check"></i><b>2.3.1</b> I-35 W Bridge Collapse</a></li>
-<li class="chapter" data-level="2.3.2" data-path="literature-review.html"><a href="literature-review.html#i-85-piedmont-road-bridge-fire"><i class="fa fa-check"></i><b>2.3.2</b> I-85 / Piedmont Road Bridge Fire</a></li>
-<li class="chapter" data-level="2.3.3" data-path="literature-review.html"><a href="literature-review.html#attempts-to-evaluate-systemic-resiliency"><i class="fa fa-check"></i><b>2.3.3</b> Attempts to Evaluate Systemic Resiliency</a></li>
+<li class="chapter" data-level="2.1" data-path="literature-review.html"><a href="literature-review.html#identifying-critical-links-on-i-15"><i class="fa fa-check"></i><b>2.1</b> Identifying Critical Links on I-15</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="literature-review.html"><a href="literature-review.html#attempts-to-evaluate-systemic-resiliency"><i class="fa fa-check"></i><b>2.1.1</b> Attempts to Evaluate Systemic Resiliency</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="literature-review.html"><a href="literature-review.html#network-connectivity"><i class="fa fa-check"></i><b>2.4</b> Network Connectivity</a></li>
-<li class="chapter" data-level="2.5" data-path="literature-review.html"><a href="literature-review.html#changes-in-travel-time"><i class="fa fa-check"></i><b>2.5</b> Changes in Travel Time</a></li>
-<li class="chapter" data-level="2.6" data-path="literature-review.html"><a href="literature-review.html#changes-in-accessibility"><i class="fa fa-check"></i><b>2.6</b> Changes in Accessibility</a></li>
-<li class="chapter" data-level="2.7" data-path="literature-review.html"><a href="literature-review.html#summary"><i class="fa fa-check"></i><b>2.7</b> Summary</a></li>
+<li class="chapter" data-level="2.2" data-path="literature-review.html"><a href="literature-review.html#network-connectivity"><i class="fa fa-check"></i><b>2.2</b> Network Connectivity</a></li>
+<li class="chapter" data-level="2.3" data-path="literature-review.html"><a href="literature-review.html#changes-in-travel-time"><i class="fa fa-check"></i><b>2.3</b> Changes in Travel Time</a></li>
+<li class="chapter" data-level="2.4" data-path="literature-review.html"><a href="literature-review.html#changes-in-accessibility"><i class="fa fa-check"></i><b>2.4</b> Changes in Accessibility</a></li>
+<li class="chapter" data-level="2.5" data-path="literature-review.html"><a href="literature-review.html#summary"><i class="fa fa-check"></i><b>2.5</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="methodology.html"><a href="methodology.html"><i class="fa fa-check"></i><b>3</b> Methodology</a><ul>
-<li class="chapter" data-level="3.1" data-path="methodology.html"><a href="methodology.html#input-data"><i class="fa fa-check"></i><b>3.1</b> Input Data</a></li>
+<li class="chapter" data-level="3.1" data-path="methodology.html"><a href="methodology.html#input-data"><i class="fa fa-check"></i><b>3.1</b> Input Data</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="methodology.html"><a href="methodology.html#socioeconomic-data"><i class="fa fa-check"></i><b>3.1.1</b> Socioeconomic Data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="methodology.html"><a href="methodology.html#mc-constans-and-coefficients"><i class="fa fa-check"></i><b>3.1.2</b> MC Constans and Coefficients</a></li>
+</ul></li>
 <li class="chapter" data-level="3.2" data-path="methodology.html"><a href="methodology.html#demonstration-model-framework"><i class="fa fa-check"></i><b>3.2</b> Demonstration Model Framework</a></li>
 <li class="chapter" data-level="3.3" data-path="methodology.html"><a href="methodology.html#simulating-a-broken-link-within-the-demonstration-model"><i class="fa fa-check"></i><b>3.3</b> Simulating a Broken Link Within the Demonstration Model</a></li>
 <li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#identifying-vulnerable-links"><i class="fa fa-check"></i><b>3.4</b> Identifying Vulnerable Links</a></li>
@@ -120,36 +183,163 @@
 <h1><span class="header-section-number">Chapter 3</span> Methodology</h1>
 <div id="input-data" class="section level2">
 <h2><span class="header-section-number">3.1</span> Input Data</h2>
-<p>This section will be added shortly, I don’t currently have easy access to csv’s or dbf’s of the input data at the time of writing. Hopefully, I’ll get it added before Dr. Macfarlane reviews this (although he knows which data I’ve been using).</p>
+<p>The USTM Resiliency project uses many input data in order to effectively produce the output Destination Choice Logsum.</p>
+<div id="socioeconomic-data" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Socioeconomic Data</h3>
+<p>Let’s start by taking a look at the Socioeconomic data produced by the Utah Travel Study, conducted in 2012. This data summarizes information gathered from 10,000 randomly selected households in Utah. A small sampling is shown below:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="methodology.html#cb12-1"></a>sedata &lt;-<span class="st"> </span><span class="kw">read.dbf</span>(<span class="st">&quot;Data/SE_USTM_BASE2015.DBF&quot;</span>)</span>
+<span id="cb12-2"><a href="methodology.html#cb12-2"></a>sedata[<span class="kw">c</span>(<span class="dv">1200</span>,<span class="dv">3300</span>,<span class="dv">4500</span>,<span class="dv">5500</span>,<span class="dv">6000</span>,<span class="dv">7500</span>,<span class="dv">8000</span>,<span class="dv">8500</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>]</span></code></pre></div>
+<pre><code>##         Z CO_TAZID SA_TAZID CO_FIPS    CO_NAME SUBAREAID TOTHH  HHPOP HHSIZE
+## 1200 1200    19071        0      19      GRAND         0  76.7  184.6   2.41
+## 3300 3300    47051        0      47     UINTAH         0  60.8  217.0   3.57
+## 4500 4500   110642      642      11      DAVIS         1   0.0    0.0   0.00
+## 5500 5500   351642     1642      35  SALT LAKE         1 234.0  621.1   2.65
+## 6000 6000   492149     2149      49       UTAH         1 470.0 2074.2   4.41
+## 7500 7500    50776      776       5      CACHE         2   4.1   12.2   2.97
+## 8000 8000   530354      354      53 WASHINGTON         3  78.6  345.3   4.39
+## 8500 8500    43017       17      43     SUMMIT         4  82.8  212.5   2.56</code></pre>
+<p>Here, we can see the attributes associated with each of the households on record. Some of the geographic areas in Utah are associated with MPOs, as indicated in the SUBAREAID column. There are only 4 MPOs in Utah, so many households, such as those in Grand and Uintah counites, do not have TAZIDs associated with them. We will also look at a summary of this data set:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="methodology.html#cb14-1"></a><span class="kw">summary</span>(sedata)</span></code></pre></div>
+<pre><code>##        Z           CO_TAZID         SA_TAZID         CO_FIPS    
+##  Min.   :   1   Min.   :     0   Min.   :   0.0   Min.   : 0.0  
+##  1st Qu.:2194   1st Qu.: 30002   1st Qu.:   0.0   1st Qu.:15.0  
+##  Median :4388   Median : 50576   Median : 131.0   Median :35.0  
+##  Mean   :4388   Mean   :197415   Mean   : 562.2   Mean   :32.2  
+##  3rd Qu.:6582   3rd Qu.:491796   3rd Qu.: 811.0   3rd Qu.:49.0  
+##  Max.   :8775   Max.   :570420   Max.   :2873.0   Max.   :57.0  
+##                                                                 
+##        CO_NAME       SUBAREAID          TOTHH            HHPOP       
+##  SALT LAKE :1146   Min.   :0.0000   Min.   :   0.0   Min.   :   0.0  
+##  UTAH      :1098   1st Qu.:0.0000   1st Qu.:   1.1   1st Qu.:   3.0  
+##  CACHE     : 922   Median :1.0000   Median :  16.1   Median :  46.6  
+##  WASHINGTON: 837   Mean   :0.9551   Mean   : 112.8   Mean   : 336.8  
+##  BOX ELDER : 437   3rd Qu.:1.0000   3rd Qu.: 124.0   3rd Qu.: 357.8  
+##  MILLARD   : 411   Max.   :4.0000   Max.   :2750.0   Max.   :7507.1  
+##  (Other)   :3924                                                     
+##      HHSIZE           TOTEMP             RETEMP            INDEMP       
+##  Min.   : 0.000   Min.   :    0.00   Min.   :   0.00   Min.   :   0.00  
+##  1st Qu.: 1.690   1st Qu.:    0.00   1st Qu.:   0.00   1st Qu.:   0.00  
+##  Median : 2.680   Median :    3.90   Median :   0.00   Median :   0.00  
+##  Mean   : 2.323   Mean   :  186.06   Mean   :  34.16   Mean   :  28.48  
+##  3rd Qu.: 3.230   3rd Qu.:   86.65   3rd Qu.:   5.90   3rd Qu.:   2.60  
+##  Max.   :11.880   Max.   :21274.00   Max.   :3073.00   Max.   :7881.00  
+##                                                                         
+##      OTHEMP            ALLEMP             RETL             FOOD        
+##  Min.   :    0.0   Min.   :    0.0   Min.   :   0.0   Min.   :   0.00  
+##  1st Qu.:    0.0   1st Qu.:    2.3   1st Qu.:   0.0   1st Qu.:   0.00  
+##  Median :    1.3   Median :   17.9   Median :   0.0   Median :   0.00  
+##  Mean   :  123.4   Mean   :  212.4   Mean   :  21.7   Mean   :  12.46  
+##  3rd Qu.:   51.0   3rd Qu.:  131.8   3rd Qu.:   2.1   3rd Qu.:   0.00  
+##  Max.   :21081.0   Max.   :21274.0   Max.   :2281.0   Max.   :1800.00  
+##                                                                        
+##       MANU              WSLE              OFFI             GVED         
+##  Min.   :   0.00   Min.   :   0.00   Min.   :   0.0   Min.   :    0.00  
+##  1st Qu.:   0.00   1st Qu.:   0.00   1st Qu.:   0.0   1st Qu.:    0.00  
+##  Median :   0.00   Median :   0.00   Median :   0.0   Median :    0.00  
+##  Mean   :  14.99   Mean   :  13.49   Mean   :  20.7   Mean   :   34.45  
+##  3rd Qu.:   0.00   3rd Qu.:   1.00   3rd Qu.:   1.7   3rd Qu.:    4.00  
+##  Max.   :5321.00   Max.   :7881.00   Max.   :3598.0   Max.   :18890.00  
+##                                                                         
+##       HLTH              OTHR              AGRI              MING         
+##  Min.   :   0.00   Min.   :   0.00   Min.   :  0.000   Min.   :   0.000  
+##  1st Qu.:   0.00   1st Qu.:   0.00   1st Qu.:  0.000   1st Qu.:   0.000  
+##  Median :   0.00   Median :   0.00   Median :  0.000   Median :   0.000  
+##  Mean   :  17.02   Mean   :  51.26   Mean   :  2.002   Mean   :   1.756  
+##  3rd Qu.:   0.00   3rd Qu.:  15.00   3rd Qu.:  0.000   3rd Qu.:   0.000  
+##  Max.   :7491.00   Max.   :5548.00   Max.   :344.700   Max.   :1597.000  
+##                                                                          
+##       CONS              HBJ             SEC_HOME           CABIN         
+##  Min.   :   0.00   Min.   :  0.000   Min.   :  0.000   Min.   :  0.0000  
+##  1st Qu.:   0.00   1st Qu.:  0.100   1st Qu.:  0.000   1st Qu.:  0.0000  
+##  Median :   0.00   Median :  1.100   Median :  0.000   Median :  0.0000  
+##  Mean   :  13.42   Mean   :  9.145   Mean   :  2.944   Mean   :  0.2547  
+##  3rd Qu.:   5.00   3rd Qu.:  9.000   3rd Qu.:  0.000   3rd Qu.:  0.0000  
+##  Max.   :2930.20   Max.   :259.000   Max.   :656.000   Max.   :573.0000  
+##                                                                          
+##      CONDO               HOTEL            AVGINCOME        ENROL_ELEM     
+##  Min.   :   0.0000   Min.   :  0.0000   Min.   :     0   Min.   :   0.00  
+##  1st Qu.:   0.0000   1st Qu.:  0.0000   1st Qu.: 43378   1st Qu.:   0.00  
+##  Median :   0.0000   Median :  0.0000   Median : 51783   Median :   0.00  
+##  Mean   :   0.5927   Mean   :  0.2206   Mean   : 54308   Mean   :  39.28  
+##  3rd Qu.:   0.0000   3rd Qu.:  0.0000   3rd Qu.: 63602   3rd Qu.:   0.00  
+##  Max.   :1044.0000   Max.   :312.0000   Max.   :208873   Max.   :2462.00  
+##                                                                           
+##    ENROL_MIDL        ENROL_HIGH     
+##  Min.   :   0.00   Min.   :   0.00  
+##  1st Qu.:   0.00   1st Qu.:   0.00  
+##  Median :   0.00   Median :   0.00  
+##  Mean   :  17.11   Mean   :  16.44  
+##  3rd Qu.:   0.00   3rd Qu.:   0.00  
+##  Max.   :2271.00   Max.   :3086.00  
+## </code></pre>
+</div>
+<div id="mc-constans-and-coefficients" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> MC Constans and Coefficients</h3>
+<p>Lets also take a look at the Mode Choice constants and coefficients:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="methodology.html#cb16-1"></a>mcconst &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/MC_Constants.csv&quot;</span>)</span>
+<span id="cb16-2"><a href="methodology.html#cb16-2"></a>mcconst</span></code></pre></div>
+<pre><code>##    X.N   Name     HBW     HBO     NHB     HBC REC
+## 1    1   K_SR -1.1703  0.0164 -0.0336 -1.1685  -1
+## 2    2  K_TRN -0.3903 -1.9811 -2.2714  0.3261  -1
+## 3    3 K_NMOT -1.2258 -0.3834 -0.8655 -1.2505  -1
+## 4    4 K_PREM  0.0000  0.0000  0.0000  0.0000   0
+## 5    5         0.0000  0.0000  0.0000  0.0000   0
+## 6    6         0.0000  0.0000  0.0000  0.0000   0
+## 7    7         0.0000  0.0000  0.0000  0.0000   0
+## 8    8         0.0000  0.0000  0.0000  0.0000   0
+## 9    9         0.0000  0.0000  0.0000  0.0000   0
+## 10  10         0.0000  0.0000  0.0000  0.0000   0</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="methodology.html#cb18-1"></a>mccoeff &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/MC_Coefficients.csv&quot;</span>)</span>
+<span id="cb18-2"><a href="methodology.html#cb18-2"></a>mccoeff</span></code></pre></div>
+<pre><code>##    X.N          Name      HBW      HBO      NHB      HBC      REC
+## 1    1      CIVTT    -0.02500 -0.01500 -0.02000 -0.01500 -0.01500
+## 2    2      CSWAIT   -0.05625 -0.03375 -0.04500 -0.03375 -0.03375
+## 3    3      CLWAIT   -0.02500 -0.01500 -0.02000 -0.01500 -0.01200
+## 4    4      CXWAIT   -0.06250 -0.03750 -0.05000 -0.03750 -0.03750
+## 5    5         CCOST -0.00158 -0.00237 -0.00253 -0.18000 -0.18000
+## 6    6      CDRIVE   -0.05625 -0.03375 -0.04500 -0.03375 -0.03375
+## 7    7      CTERML   -0.06250 -0.03750 -0.05000 -0.06250 -0.06250
+## 8    8      CWALK    -0.06250 -0.03750 -0.05000 -0.03750 -0.03750
+## 9    9      CWALK1   -0.06250 -0.03750 -0.05000 -0.03750 -0.03750
+## 10  10      CWALK2   -0.09375 -0.05625 -0.07500 -0.05625 -0.05625
+## 11  11      CBIKE1   -0.06250 -0.03750 -0.05000 -0.03750 -0.03750
+## 12  12      CBIKE2   -0.09375 -0.05625 -0.07500 -0.05625 -0.05625
+## 13  13 DWalkBIKE      1.00000  1.00000  1.00000  1.00000  1.00000
+## 14  14           NC1  0.50000  0.50000  0.50000  0.50000  0.50000
+## 15  15           NC2  0.50000  0.50000  0.50000  0.50000  0.50000
+## 16  16           NC3  0.50000  0.50000  0.50000  0.50000  0.50000
+## 17  17           CBD  0.00000  0.00000  0.00000  0.00000  0.00000
+## 18  18         NXFER  0.00000  0.00000  0.00000  0.00000  0.00000
+## 19  19      AUTOCOST 13.60000 13.60000 13.60000 13.60000 13.60000
+## 20  20      SHAREFAC  2.00000  2.00000  2.00000  2.00000  2.00000</code></pre>
+<p>The Mode Choice Constants and Coefficients are used to help weight the inputs to correctly determine the Mode Choice Logsum output, that serves as the impedance term in the Destination Choice Logsum calculation. These inputs are taken from the Oregen Statewide Travel Model, and from the Roanokoke Valley Transportation Planning Organization. The Oregon model had well suited data for each of the five trip types except Home-based work trips, which is why we used the RVTPO data for HBW trip purposes.</p>
+</div>
 </div>
 <div id="demonstration-model-framework" class="section level2">
 <h2><span class="header-section-number">3.2</span> Demonstration Model Framework</h2>
-<p>Figure # show a schematic of the model framework. The framework has three main inputs:<br />
+<p>Figure 1 shows a schematic of the model framework.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="methodology.html#cb20-1"></a><span class="kw">include_graphics</span>(<span class="kw">rep</span>(<span class="st">&#39;images/model_framework.png&#39;</span>, <span class="dv">3</span>))</span></code></pre></div>
+<p><img src="images/model_framework.png" width="540" /><img src="images/model_framework.png" width="540" /><img src="images/model_framework.png" width="540" /></p>
+<p>The framework has three main inputs:<br />
 A. Highway Network: The USTM model network was obtained from UDOT and forms the basis of the model.
 B. Productions: Zonal trip productions from the USTM model
 C. Attractions: Zonal trip attractions from the USTM model</p>
-<blockquote>
-<p>insert figure of model here</p>
-</blockquote>
 <p>The model individually calculates mode choice and destination choice logsum values for each trip purpose, and then combines these outputs together. Thus, steps 3 and 4 of the model contain “children” processes with several groups of repeated code, once for each trip purpose.</p>
 <p>The mode choice model framework currently implemented is based on the Roanoke, Virginia travel model that serves as a basis for much of the code in the model. The USTM mode choice model uses similar alternatives and parameters, and we anticipate conflating and combining these coefficients in the next few weeks. The mode choice model includes utility parameters for in-vehicle travel time, out-of-vehicle travel time, wait time, automobile operating cost, and other elements for each trip purpose. The mode choice alternatives are drive alone, shared ride, non-motorized, and transit (all modes). USTM relies on MPO-level mode choice models to handle transit use, but in this application, it is important to consider transit as an available alternative. Work is underway to convert the minimum WFRC transit skim among all modes into a single “transit” skim at the USTM zone level.</p>
 <p>The destination choice model uses the same purposes as the mode choice model, with utility equation coefficients including the zonal attractions as a size term and the mode choice log sum as an impedance term. The current demonstration model uses destination choice parameters and calibration constants derived from the Roanoke, Virginia model. Research into destination choice utility coefficients used in statewide models is ongoing, and a minimal calibration exercise will be reported at the next TAC meeting.</p>
-<p>The outputs are then combined to create a single file with all of the destination choice log sum accessibility outputs. The final output of the model is the destination choice log sum.</p>
-<blockquote>
-<p>An example output can be seen in #####</p>
-</blockquote>
+<p>The outputs are then combined to create a single file with all of the destination choice log sum accessibility outputs. The final output of the model is the destination choice log sum, shown as an individual rowsum for each trip purpose.</p>
 </div>
 <div id="simulating-a-broken-link-within-the-demonstration-model" class="section level2">
 <h2><span class="header-section-number">3.3</span> Simulating a Broken Link Within the Demonstration Model</h2>
 <p>We conducted a sensitivity analysis where we simulated a broken highway link in our demonstration model to verify that the model was responding in an appropriate way. Figure 4 shows the change in the log sum value for each purpose resulting from breaking a single highway link across all trip purposes. In order to simulate the changes caused by a broken link, a link was removed from the network file; the model then uses updated highway travel times to compute the mode and destination choice log sums. In general, the change in log sums shows a reasonable response, but the link selected is a major facility for travel in all directions through Roanoke. We are currently investigating whether these unexpected results are the result of improper specification, or whether they reveal a genuine nuance within this particular application technique.</p>
-<blockquote>
-<p>add image of the choropleth maps here</p>
-</blockquote>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="methodology.html#cb21-1"></a><span class="kw">include_graphics</span>(<span class="kw">rep</span>(<span class="st">&#39;images/absolute_error_choropleth&#39;</span>, <span class="dv">3</span>))</span></code></pre></div>
+<p><img src="images/absolute_error_choropleth" /><!-- --><img src="images/absolute_error_choropleth" /><!-- --><img src="images/absolute_error_choropleth" /><!-- --></p>
 </div>
 <div id="identifying-vulnerable-links" class="section level2">
 <h2><span class="header-section-number">3.4</span> Identifying Vulnerable Links</h2>
-<p>It is necessary for us to identify links in the UTSM network whose breaks we could simulate in our analysis. The AEM (2017) study inspiring this current work identified nine physical threat categories and locations of elevated risk to highway facilities on the I-15 corridor; the present analysis requires that we identify highway links at risk anywhere in Utah, and thus cannot rely only on the identification completed by AEM. An alternative method to identifying links vulnerable to specific risks would be to simply make arbitrary cuts in the network at locations the TAC identifies that could be representative of unknown threats or suspected choke points in the USTM network. The Risk Priority Analysis completed by BIO-WEST (2020) shows Composite Threat Probability by Road Segment. We used this analysis to identify 40 locations in the UTSM network that are either posed with an elevated annual threat or identified as a choke point. We also desired to have a mix of urban and rural facilities to demonstrate the potential flexibility of our proposed technique.
-&gt;The selected locations are shown in Figure 5.</p>
+<p>It is necessary for us to identify links in the UTSM network whose breaks we could simulate in our analysis. The AEM (2017) study inspiring this current work identified nine physical threat categories and locations of elevated risk to highway facilities on the I-15 corridor; the present analysis requires that we identify highway links at risk anywhere in Utah, and thus cannot rely only on the identification completed by AEM. An alternative method to identifying links vulnerable to specific risks would be to simply make arbitrary cuts in the network at locations the TAC identifies that could be representative of unknown threats or suspected choke points in the USTM network. The Risk Priority Analysis completed by BIO-WEST (2020) shows Composite Threat Probability by Road Segment. We used this analysis to identify 40 locations in the UTSM network that are either posed with an elevated annual threat or identified as a choke point. We also desired to have a mix of urban and rural facilities to demonstrate the potential flexibility of our proposed technique.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="methodology.html#cb22-1"></a><span class="kw">include_graphics</span>(<span class="kw">rep</span>(<span class="st">&#39;images/risky_links.png&#39;</span>, <span class="dv">3</span>))</span></code></pre></div>
+<p><img src="images/risky_links.png" width="316" /><img src="images/risky_links.png" width="316" /><img src="images/risky_links.png" width="316" /></p>
 
 </div>
 </div>
@@ -209,6 +399,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
