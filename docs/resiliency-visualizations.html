@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 resiliency visualizations | Resiliency in Transportation Systems</title>
+  <meta name="description" content="Data analysis report prepared for Dr. Greg Macfarlane as part of the CEEN 594r curriculum." />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 resiliency visualizations | Resiliency in Transportation Systems" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Data analysis report prepared for Dr. Greg Macfarlane as part of the CEEN 594r curriculum." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 resiliency visualizations | Resiliency in Transportation Systems" />
+  
+  <meta name="twitter:description" content="Data analysis report prepared for Dr. Greg Macfarlane as part of the CEEN 594r curriculum." />
+  
+
+<meta name="author" content="Max Barnes" />
+
+
+<meta name="date" content="2020-12-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="methodology.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Project Question</a></li>
+<li class="chapter" data-level="2" data-path="literature-review.html"><a href="literature-review.html"><i class="fa fa-check"></i><b>2</b> Literature Review</a><ul>
+<li class="chapter" data-level="2.1" data-path="literature-review.html"><a href="literature-review.html#identifying-critical-links-on-i-15"><i class="fa fa-check"></i><b>2.1</b> Identifying Critical Links on I-15</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="literature-review.html"><a href="literature-review.html#attempts-to-evaluate-systemic-resiliency"><i class="fa fa-check"></i><b>2.1.1</b> Attempts to Evaluate Systemic Resiliency</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="literature-review.html"><a href="literature-review.html#network-connectivity"><i class="fa fa-check"></i><b>2.2</b> Network Connectivity</a></li>
+<li class="chapter" data-level="2.3" data-path="literature-review.html"><a href="literature-review.html#changes-in-travel-time"><i class="fa fa-check"></i><b>2.3</b> Changes in Travel Time</a></li>
+<li class="chapter" data-level="2.4" data-path="literature-review.html"><a href="literature-review.html#changes-in-accessibility"><i class="fa fa-check"></i><b>2.4</b> Changes in Accessibility</a></li>
+<li class="chapter" data-level="2.5" data-path="literature-review.html"><a href="literature-review.html#summary"><i class="fa fa-check"></i><b>2.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="methodology.html"><a href="methodology.html"><i class="fa fa-check"></i><b>3</b> Methodology</a><ul>
+<li class="chapter" data-level="3.1" data-path="methodology.html"><a href="methodology.html#input-data"><i class="fa fa-check"></i><b>3.1</b> Input Data</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="methodology.html"><a href="methodology.html#socioeconomic-data"><i class="fa fa-check"></i><b>3.1.1</b> Socioeconomic Data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="methodology.html"><a href="methodology.html#mc-constans-and-coefficients"><i class="fa fa-check"></i><b>3.1.2</b> MC Constans and Coefficients</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="methodology.html"><a href="methodology.html#demonstration-model-framework"><i class="fa fa-check"></i><b>3.2</b> Demonstration Model Framework</a></li>
+<li class="chapter" data-level="3.3" data-path="methodology.html"><a href="methodology.html#simulating-a-broken-link-within-the-demonstration-model"><i class="fa fa-check"></i><b>3.3</b> Simulating a Broken Link Within the Demonstration Model</a></li>
+<li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#identifying-vulnerable-links"><i class="fa fa-check"></i><b>3.4</b> Identifying Vulnerable Links</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="resiliency-visualizations.html"><a href="resiliency-visualizations.html"><i class="fa fa-check"></i><b>4</b> resiliency visualizations</a></li>
+<li class="chapter" data-level="5" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>5</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Resiliency in Transportation Systems</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="resiliency-visualizations" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> resiliency visualizations</h1>
+<p>In the following DCLS analysis and comparison between an original, fully functioning network and a broken network, one intersection was removed from the network, meaning no vehicles could traverse the area as usual. The intersection of Melrose Ave and Peters Creek Rd. Both links appear to be major routes, with 2 lanes traveling in all directions, and a signalized intersection used for traffic control. The intersections is surrounded by small businesses and a small shopping complex, that appears to be in the style of a strip mall, and there are neighborhoods in the vicinity.</p>
+<p>The input data included in this analysis are both the whole and altered network DCLS outputs, as well as a shapefile map of the Roanoke, VA, area. The model was initially run on this dummy network because it is much smaller (with 267 TAZ’s, compared to USTM’s 8700 TAZ’s) and can run a full analysis from beginning to end in about 20-30 seconds. This allows the model to be created quickly, because bugs can be found more effectively.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="resiliency-visualizations.html#cb22-1"></a><span class="co"># Loading two data sets and a base map from the data folder</span></span>
+<span id="cb22-2"><a href="resiliency-visualizations.html#cb22-2"></a><span class="co"># The first data set is the whole network named WHOLE_ROWSUMS.DBF</span></span>
+<span id="cb22-3"><a href="resiliency-visualizations.html#cb22-3"></a><span class="co"># The second data set is 01_ROWSUMS.DBF, which should be taken</span></span>
+<span id="cb22-4"><a href="resiliency-visualizations.html#cb22-4"></a><span class="co"># from the CUBE model each time a new iteration is run</span></span>
+<span id="cb22-5"><a href="resiliency-visualizations.html#cb22-5"></a>whole_rowsum &lt;-<span class="st"> </span><span class="kw">read.dbf</span>(<span class="st">&quot;Data/WHOLE_ROWSUMS.DBF&quot;</span>)  <span class="co">#original unbroken network</span></span>
+<span id="cb22-6"><a href="resiliency-visualizations.html#cb22-6"></a>broken_rowsum &lt;-<span class="st"> </span><span class="kw">read.dbf</span>(<span class="st">&quot;Data/01_ROWSUMS.DBF&quot;</span>)    <span class="co">#altered broken network</span></span>
+<span id="cb22-7"><a href="resiliency-visualizations.html#cb22-7"></a>map &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;Data/RoanokeTAZ.shp&quot;</span>)               <span class="co">#load shapefile</span></span></code></pre></div>
+<p>An initial difference comparison was run on the data to determine the number of changes, if any, that were produced by cutting a link in the model. For this comparison, there are 312 differences between the original data set and the new data with a cut link. Lets compare several different methods to visualize the differences in DCLS created by the model because there were several hundred differences. Visualizing the data will help to better understand some of the impacts that a reduction in network function can have on the immediate and distant vicinity of the network disruption.</p>
+<p>In the following plots, we see several different sets of code and outputs that compare the original functional network to a network with a cut link. Each plot shows a measure of the differences using a different mathematical comparison. A brief commentary, which will highlight changes between plots, if any, will be provided. An additional summary of total RMSE calculations will also be provided.
+.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="resiliency-visualizations.html#cb23-1"></a><span class="co"># Create plot that compares the before and after 5 trip purposes using</span></span>
+<span id="cb23-2"><a href="resiliency-visualizations.html#cb23-2"></a><span class="co"># a simple difference calculation</span></span>
+<span id="cb23-3"><a href="resiliency-visualizations.html#cb23-3"></a>change_broken1 &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb23-4"><a href="resiliency-visualizations.html#cb23-4"></a>  <span class="st">&quot;Original&quot;</span> =<span class="st"> </span>whole_rowsum,</span>
+<span id="cb23-5"><a href="resiliency-visualizations.html#cb23-5"></a>  <span class="st">&quot;Broken Link&quot;</span> =<span class="st"> </span>broken_rowsum</span>
+<span id="cb23-6"><a href="resiliency-visualizations.html#cb23-6"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb23-7"><a href="resiliency-visualizations.html#cb23-7"></a><span class="st">  </span><span class="kw">bind_rows</span>(<span class="dt">.id =</span> <span class="st">&quot;Scenario&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb23-8"><a href="resiliency-visualizations.html#cb23-8"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></span>
+<span id="cb23-9"><a href="resiliency-visualizations.html#cb23-9"></a><span class="st">  </span><span class="kw">gather</span>(<span class="st">&quot;purpose&quot;</span>, <span class="st">&quot;logsum&quot;</span>, <span class="op">-</span>Scenario, <span class="op">-</span>TAZ) <span class="op">%&gt;%</span></span>
+<span id="cb23-10"><a href="resiliency-visualizations.html#cb23-10"></a><span class="st">  </span><span class="kw">spread</span>(Scenario, logsum, <span class="dt">fill =</span> <span class="ot">NA</span>) <span class="op">%&gt;%</span></span>
+<span id="cb23-11"><a href="resiliency-visualizations.html#cb23-11"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb23-12"><a href="resiliency-visualizations.html#cb23-12"></a>    <span class="dt">difference =</span> (<span class="st">`</span><span class="dt">Broken Link</span><span class="st">`</span> <span class="op">-</span><span class="st"> </span>Original)</span>
+<span id="cb23-13"><a href="resiliency-visualizations.html#cb23-13"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb23-14"><a href="resiliency-visualizations.html#cb23-14"></a><span class="st">  </span><span class="kw">select</span>(TAZ, purpose, difference) <span class="op">%&gt;%</span></span>
+<span id="cb23-15"><a href="resiliency-visualizations.html#cb23-15"></a><span class="st">  </span><span class="kw">spread</span>(purpose, difference, <span class="ot">NA</span>)</span>
+<span id="cb23-16"><a href="resiliency-visualizations.html#cb23-16"></a></span>
+<span id="cb23-17"><a href="resiliency-visualizations.html#cb23-17"></a><span class="co"># Stitching data together</span></span>
+<span id="cb23-18"><a href="resiliency-visualizations.html#cb23-18"></a>broken_map &lt;-<span class="st"> </span><span class="kw">left_join</span>(map, change_broken1, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;ID&quot;</span> =<span class="st"> &quot;TAZ&quot;</span>))</span>
+<span id="cb23-19"><a href="resiliency-visualizations.html#cb23-19"></a></span>
+<span id="cb23-20"><a href="resiliency-visualizations.html#cb23-20"></a><span class="co"># Create choropleth with 5 trip purposes</span></span>
+<span id="cb23-21"><a href="resiliency-visualizations.html#cb23-21"></a><span class="kw">plot</span>(broken_map[, <span class="kw">c</span>(<span class="st">&quot;LNHBO&quot;</span>, <span class="st">&quot;LNHBW&quot;</span>, <span class="st">&quot;LNREC&quot;</span>, <span class="st">&quot;LNHBC&quot;</span>, <span class="st">&quot;LNNHB&quot;</span>)])</span></code></pre></div>
+<p><img src="ceen_594r_files/figure-html/difference-1.png" width="672" /></p>
+<p>The differences between the simple difference plot and the absolute error plot are that all values must be positive in the absolute error comparison. This simply changes the color scheme of the output plots. Coincidentally, this makes it easier to interpret the plots visually. This is a useful change to the information.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="resiliency-visualizations.html#cb24-1"></a><span class="co"># Create plot that compares the before and after 5 trip purposes using</span></span>
+<span id="cb24-2"><a href="resiliency-visualizations.html#cb24-2"></a><span class="co"># an absolute error calculation</span></span>
+<span id="cb24-3"><a href="resiliency-visualizations.html#cb24-3"></a>change_broken2 &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb24-4"><a href="resiliency-visualizations.html#cb24-4"></a>  <span class="st">&quot;Original&quot;</span> =<span class="st"> </span>whole_rowsum,</span>
+<span id="cb24-5"><a href="resiliency-visualizations.html#cb24-5"></a>  <span class="st">&quot;Broken Link&quot;</span> =<span class="st"> </span>broken_rowsum</span>
+<span id="cb24-6"><a href="resiliency-visualizations.html#cb24-6"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb24-7"><a href="resiliency-visualizations.html#cb24-7"></a><span class="st">  </span><span class="kw">bind_rows</span>(<span class="dt">.id =</span> <span class="st">&quot;Scenario&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb24-8"><a href="resiliency-visualizations.html#cb24-8"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></span>
+<span id="cb24-9"><a href="resiliency-visualizations.html#cb24-9"></a><span class="st">  </span><span class="kw">gather</span>(<span class="st">&quot;purpose&quot;</span>, <span class="st">&quot;logsum&quot;</span>, <span class="op">-</span>Scenario, <span class="op">-</span>TAZ) <span class="op">%&gt;%</span></span>
+<span id="cb24-10"><a href="resiliency-visualizations.html#cb24-10"></a><span class="st">  </span><span class="kw">spread</span>(Scenario, logsum, <span class="dt">fill =</span> <span class="ot">NA</span>) <span class="op">%&gt;%</span></span>
+<span id="cb24-11"><a href="resiliency-visualizations.html#cb24-11"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb24-12"><a href="resiliency-visualizations.html#cb24-12"></a>    <span class="dt">difference =</span> (<span class="kw">abs</span>(<span class="st">`</span><span class="dt">Broken Link</span><span class="st">`</span> <span class="op">-</span><span class="st"> </span>Original))</span>
+<span id="cb24-13"><a href="resiliency-visualizations.html#cb24-13"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb24-14"><a href="resiliency-visualizations.html#cb24-14"></a><span class="st">  </span><span class="kw">select</span>(TAZ, purpose, difference) <span class="op">%&gt;%</span></span>
+<span id="cb24-15"><a href="resiliency-visualizations.html#cb24-15"></a><span class="st">  </span><span class="kw">spread</span>(purpose, difference, <span class="ot">NA</span>)</span>
+<span id="cb24-16"><a href="resiliency-visualizations.html#cb24-16"></a></span>
+<span id="cb24-17"><a href="resiliency-visualizations.html#cb24-17"></a><span class="co"># Stitching data together</span></span>
+<span id="cb24-18"><a href="resiliency-visualizations.html#cb24-18"></a>broken_map &lt;-<span class="st"> </span><span class="kw">left_join</span>(map, change_broken2, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;ID&quot;</span> =<span class="st"> &quot;TAZ&quot;</span>))</span>
+<span id="cb24-19"><a href="resiliency-visualizations.html#cb24-19"></a></span>
+<span id="cb24-20"><a href="resiliency-visualizations.html#cb24-20"></a><span class="co"># Create choropleth with 5 trip purposes</span></span>
+<span id="cb24-21"><a href="resiliency-visualizations.html#cb24-21"></a><span class="kw">plot</span>(broken_map[, <span class="kw">c</span>(<span class="st">&quot;LNHBO&quot;</span>, <span class="st">&quot;LNHBW&quot;</span>, <span class="st">&quot;LNREC&quot;</span>, <span class="st">&quot;LNHBC&quot;</span>, <span class="st">&quot;LNNHB&quot;</span>)])</span></code></pre></div>
+<p><img src="ceen_594r_files/figure-html/absolute%20error%20comparison-1.png" width="672" /></p>
+<p>The next two plots show the results using an RMSE and mean absolute error calculation (MAE). MAE measures the average magnitude of the error in a data set, without considering direction. The MAE plot shows the average over the test sample of the absolute differences between prediction and actual observation where all observations are weighted equally. The RMSE function is valuable because of the quadratic nature with which it measures the average magnitude of error in the data. RMSE shows the square root of the average squared difference between estimated and actual data.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="resiliency-visualizations.html#cb25-1"></a><span class="co"># Create plot that compares the before and after 5 trip purposes using</span></span>
+<span id="cb25-2"><a href="resiliency-visualizations.html#cb25-2"></a><span class="co"># an RMSE calculation</span></span>
+<span id="cb25-3"><a href="resiliency-visualizations.html#cb25-3"></a>change_broken3 &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb25-4"><a href="resiliency-visualizations.html#cb25-4"></a>  <span class="st">&quot;Original&quot;</span> =<span class="st"> </span>whole_rowsum,</span>
+<span id="cb25-5"><a href="resiliency-visualizations.html#cb25-5"></a>  <span class="st">&quot;Broken Link&quot;</span> =<span class="st"> </span>broken_rowsum</span>
+<span id="cb25-6"><a href="resiliency-visualizations.html#cb25-6"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb25-7"><a href="resiliency-visualizations.html#cb25-7"></a><span class="st">  </span><span class="kw">bind_rows</span>(<span class="dt">.id =</span> <span class="st">&quot;Scenario&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb25-8"><a href="resiliency-visualizations.html#cb25-8"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></span>
+<span id="cb25-9"><a href="resiliency-visualizations.html#cb25-9"></a><span class="st">  </span><span class="kw">gather</span>(<span class="st">&quot;purpose&quot;</span>, <span class="st">&quot;logsum&quot;</span>, <span class="op">-</span>Scenario, <span class="op">-</span>TAZ) <span class="op">%&gt;%</span></span>
+<span id="cb25-10"><a href="resiliency-visualizations.html#cb25-10"></a><span class="st">  </span><span class="kw">spread</span>(Scenario, logsum, <span class="dt">fill =</span> <span class="ot">NA</span>) <span class="op">%&gt;%</span></span>
+<span id="cb25-11"><a href="resiliency-visualizations.html#cb25-11"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb25-12"><a href="resiliency-visualizations.html#cb25-12"></a>    <span class="dt">difference =</span> <span class="kw">sqrt</span>(((Original <span class="op">-</span><span class="st"> `</span><span class="dt">Broken Link</span><span class="st">`</span>)<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="kw">nrow</span>(whole_rowsum))</span>
+<span id="cb25-13"><a href="resiliency-visualizations.html#cb25-13"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb25-14"><a href="resiliency-visualizations.html#cb25-14"></a><span class="st">  </span><span class="kw">select</span>(TAZ, purpose, difference) <span class="op">%&gt;%</span></span>
+<span id="cb25-15"><a href="resiliency-visualizations.html#cb25-15"></a><span class="st">  </span><span class="kw">spread</span>(purpose, difference, <span class="ot">NA</span>)</span>
+<span id="cb25-16"><a href="resiliency-visualizations.html#cb25-16"></a></span>
+<span id="cb25-17"><a href="resiliency-visualizations.html#cb25-17"></a><span class="co"># Stitching data together</span></span>
+<span id="cb25-18"><a href="resiliency-visualizations.html#cb25-18"></a>broken_map &lt;-<span class="st"> </span><span class="kw">left_join</span>(map, change_broken3, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;ID&quot;</span> =<span class="st"> &quot;TAZ&quot;</span>))</span>
+<span id="cb25-19"><a href="resiliency-visualizations.html#cb25-19"></a></span>
+<span id="cb25-20"><a href="resiliency-visualizations.html#cb25-20"></a><span class="co"># Create choropleth with 5 trip purposes</span></span>
+<span id="cb25-21"><a href="resiliency-visualizations.html#cb25-21"></a><span class="kw">plot</span>(broken_map[, <span class="kw">c</span>(<span class="st">&quot;LNHBO&quot;</span>, <span class="st">&quot;LNHBW&quot;</span>, <span class="st">&quot;LNREC&quot;</span>, <span class="st">&quot;LNHBC&quot;</span>, <span class="st">&quot;LNNHB&quot;</span>)])</span></code></pre></div>
+<p><img src="ceen_594r_files/figure-html/RMSE-1.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="resiliency-visualizations.html#cb26-1"></a><span class="co"># Create plot that compares the before and after 5 trip purposes using</span></span>
+<span id="cb26-2"><a href="resiliency-visualizations.html#cb26-2"></a><span class="co"># an MAE calculation</span></span>
+<span id="cb26-3"><a href="resiliency-visualizations.html#cb26-3"></a>change_broken4 &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb26-4"><a href="resiliency-visualizations.html#cb26-4"></a>  <span class="st">&quot;Original&quot;</span> =<span class="st"> </span>whole_rowsum,</span>
+<span id="cb26-5"><a href="resiliency-visualizations.html#cb26-5"></a>  <span class="st">&quot;Broken Link&quot;</span> =<span class="st"> </span>broken_rowsum</span>
+<span id="cb26-6"><a href="resiliency-visualizations.html#cb26-6"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb26-7"><a href="resiliency-visualizations.html#cb26-7"></a><span class="st">  </span><span class="kw">bind_rows</span>(<span class="dt">.id =</span> <span class="st">&quot;Scenario&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb26-8"><a href="resiliency-visualizations.html#cb26-8"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></span>
+<span id="cb26-9"><a href="resiliency-visualizations.html#cb26-9"></a><span class="st">  </span><span class="kw">gather</span>(<span class="st">&quot;purpose&quot;</span>, <span class="st">&quot;logsum&quot;</span>, <span class="op">-</span>Scenario, <span class="op">-</span>TAZ) <span class="op">%&gt;%</span></span>
+<span id="cb26-10"><a href="resiliency-visualizations.html#cb26-10"></a><span class="st">  </span><span class="kw">spread</span>(Scenario, logsum, <span class="dt">fill =</span> <span class="ot">NA</span>) <span class="op">%&gt;%</span></span>
+<span id="cb26-11"><a href="resiliency-visualizations.html#cb26-11"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb26-12"><a href="resiliency-visualizations.html#cb26-12"></a>    <span class="dt">difference =</span> (<span class="kw">abs</span>(<span class="st">`</span><span class="dt">Broken Link</span><span class="st">`</span> <span class="op">-</span><span class="st"> </span>Original)<span class="op">/</span><span class="kw">nrow</span>(whole_rowsum))</span>
+<span id="cb26-13"><a href="resiliency-visualizations.html#cb26-13"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb26-14"><a href="resiliency-visualizations.html#cb26-14"></a><span class="st">  </span><span class="kw">select</span>(TAZ, purpose, difference) <span class="op">%&gt;%</span></span>
+<span id="cb26-15"><a href="resiliency-visualizations.html#cb26-15"></a><span class="st">  </span><span class="kw">spread</span>(purpose, difference, <span class="ot">NA</span>)</span>
+<span id="cb26-16"><a href="resiliency-visualizations.html#cb26-16"></a></span>
+<span id="cb26-17"><a href="resiliency-visualizations.html#cb26-17"></a><span class="co"># Stitching data together</span></span>
+<span id="cb26-18"><a href="resiliency-visualizations.html#cb26-18"></a>broken_map &lt;-<span class="st"> </span><span class="kw">left_join</span>(map, change_broken4, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;ID&quot;</span> =<span class="st"> &quot;TAZ&quot;</span>))</span>
+<span id="cb26-19"><a href="resiliency-visualizations.html#cb26-19"></a></span>
+<span id="cb26-20"><a href="resiliency-visualizations.html#cb26-20"></a><span class="co"># Create choropleth with 5 trip purposes</span></span>
+<span id="cb26-21"><a href="resiliency-visualizations.html#cb26-21"></a><span class="kw">plot</span>(broken_map[, <span class="kw">c</span>(<span class="st">&quot;LNHBO&quot;</span>, <span class="st">&quot;LNHBW&quot;</span>, <span class="st">&quot;LNREC&quot;</span>, <span class="st">&quot;LNHBC&quot;</span>, <span class="st">&quot;LNNHB&quot;</span>)])</span></code></pre></div>
+<p><img src="ceen_594r_files/figure-html/MAE-1.png" width="672" /></p>
+<p>Mean absolute percentage error (MAPE) is a measure of the prediction accuracy used in statistical analysis. MAPE is typically used as a loss function in regression analysis and in model evaluation. This is because it is good at interpreting relative error. The MAPE plot, when compared with the MAE plot, shows more variation in change measurement. That is, it provides what appears to be a more detailed plot with increased color variations. This can specifically be seen to the south of the city center area. One drawback to using MAPE, is that all calculations are weighted equally, so there is no way to differentiate between important and unimportant.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="resiliency-visualizations.html#cb27-1"></a><span class="co"># Create plot that compares the before and after 5 trip purposes using</span></span>
+<span id="cb27-2"><a href="resiliency-visualizations.html#cb27-2"></a><span class="co"># an mean absolute percentage calculation</span></span>
+<span id="cb27-3"><a href="resiliency-visualizations.html#cb27-3"></a>change_broken5 &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb27-4"><a href="resiliency-visualizations.html#cb27-4"></a>  <span class="st">&quot;Original&quot;</span> =<span class="st"> </span>whole_rowsum,</span>
+<span id="cb27-5"><a href="resiliency-visualizations.html#cb27-5"></a>  <span class="st">&quot;Broken Link&quot;</span> =<span class="st"> </span>broken_rowsum</span>
+<span id="cb27-6"><a href="resiliency-visualizations.html#cb27-6"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb27-7"><a href="resiliency-visualizations.html#cb27-7"></a><span class="st">  </span><span class="kw">bind_rows</span>(<span class="dt">.id =</span> <span class="st">&quot;Scenario&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb27-8"><a href="resiliency-visualizations.html#cb27-8"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></span>
+<span id="cb27-9"><a href="resiliency-visualizations.html#cb27-9"></a><span class="st">  </span><span class="kw">gather</span>(<span class="st">&quot;purpose&quot;</span>, <span class="st">&quot;logsum&quot;</span>, <span class="op">-</span>Scenario, <span class="op">-</span>TAZ) <span class="op">%&gt;%</span></span>
+<span id="cb27-10"><a href="resiliency-visualizations.html#cb27-10"></a><span class="st">  </span><span class="kw">spread</span>(Scenario, logsum, <span class="dt">fill =</span> <span class="ot">NA</span>) <span class="op">%&gt;%</span></span>
+<span id="cb27-11"><a href="resiliency-visualizations.html#cb27-11"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb27-12"><a href="resiliency-visualizations.html#cb27-12"></a>    <span class="dt">difference =</span> (<span class="kw">abs</span>((Original <span class="op">-</span><span class="st"> `</span><span class="dt">Broken Link</span><span class="st">`</span>)<span class="op">/</span><span class="st">`</span><span class="dt">Broken Link</span><span class="st">`</span>))<span class="op">*</span>(<span class="dv">1</span><span class="op">/</span><span class="kw">nrow</span>(whole_rowsum))</span>
+<span id="cb27-13"><a href="resiliency-visualizations.html#cb27-13"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb27-14"><a href="resiliency-visualizations.html#cb27-14"></a><span class="st">  </span><span class="kw">select</span>(TAZ, purpose, difference) <span class="op">%&gt;%</span></span>
+<span id="cb27-15"><a href="resiliency-visualizations.html#cb27-15"></a><span class="st">  </span><span class="kw">spread</span>(purpose, difference, <span class="ot">NA</span>)</span>
+<span id="cb27-16"><a href="resiliency-visualizations.html#cb27-16"></a></span>
+<span id="cb27-17"><a href="resiliency-visualizations.html#cb27-17"></a><span class="co"># Stitching data together</span></span>
+<span id="cb27-18"><a href="resiliency-visualizations.html#cb27-18"></a>broken_map &lt;-<span class="st"> </span><span class="kw">left_join</span>(map, change_broken5, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;ID&quot;</span> =<span class="st"> &quot;TAZ&quot;</span>))</span>
+<span id="cb27-19"><a href="resiliency-visualizations.html#cb27-19"></a></span>
+<span id="cb27-20"><a href="resiliency-visualizations.html#cb27-20"></a><span class="co"># Create choropleth with 5 trip purposes</span></span>
+<span id="cb27-21"><a href="resiliency-visualizations.html#cb27-21"></a><span class="kw">plot</span>(broken_map[, <span class="kw">c</span>(<span class="st">&quot;LNHBO&quot;</span>, <span class="st">&quot;LNHBW&quot;</span>, <span class="st">&quot;LNREC&quot;</span>, <span class="st">&quot;LNHBC&quot;</span>, <span class="st">&quot;LNNHB&quot;</span>)])</span></code></pre></div>
+<p><img src="ceen_594r_files/figure-html/mean%20absolute%20percentage%20error-1.png" width="672" /></p>
+<p>Now that we have reviewed all the different ways to measure the differences between the original and altered network destination choice logusms, we will view the overall RMSE value for each trip purpose from each of the comparisons.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="resiliency-visualizations.html#cb28-1"></a><span class="co">## Total RMSE between full model and difference comparison</span></span>
+<span id="cb28-2"><a href="resiliency-visualizations.html#cb28-2"></a><span class="kw">RMSE</span>(change_broken1, <span class="dt">parameter =</span> whole_rowsum, <span class="dt">type =</span> <span class="st">&quot;RMSE&quot;</span>)</span></code></pre></div>
+<pre><code>##       TAZ     LNHBC     LNHBO     LNHBW     LNNHB     LNREC 
+## 157.32682  64.12083  64.47364  62.64110  63.06791  63.41272</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="resiliency-visualizations.html#cb30-1"></a><span class="co">## Total RMSE between full model and absolute error comparison</span></span>
+<span id="cb30-2"><a href="resiliency-visualizations.html#cb30-2"></a><span class="kw">RMSE</span>(change_broken2, <span class="dt">parameter =</span> whole_rowsum, <span class="dt">type =</span> <span class="st">&quot;RMSE&quot;</span>)</span></code></pre></div>
+<pre><code>##       TAZ     LNHBC     LNHBO     LNHBW     LNNHB     LNREC 
+## 157.32682  64.11984  64.47250  62.63952  63.06703  63.41139</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="resiliency-visualizations.html#cb32-1"></a><span class="co">## Total RMSE between full model and RMSE comparison</span></span>
+<span id="cb32-2"><a href="resiliency-visualizations.html#cb32-2"></a><span class="kw">RMSE</span>(change_broken3, <span class="dt">parameter =</span> whole_rowsum, <span class="dt">type =</span> <span class="st">&quot;RMSE&quot;</span>)</span></code></pre></div>
+<pre><code>##       TAZ     LNHBC     LNHBO     LNHBW     LNNHB     LNREC 
+## 157.32682  64.12030  64.47303  62.71922  63.06743  63.41201</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="resiliency-visualizations.html#cb34-1"></a><span class="co">## Total RMSE between full model and mean absolute error comparison</span></span>
+<span id="cb34-2"><a href="resiliency-visualizations.html#cb34-2"></a><span class="kw">RMSE</span>(change_broken4, <span class="dt">parameter =</span> whole_rowsum, <span class="dt">type =</span> <span class="st">&quot;RMSE&quot;</span>)</span></code></pre></div>
+<pre><code>##       TAZ     LNHBC     LNHBO     LNHBW     LNNHB     LNREC 
+## 157.32682  64.12033  64.47306  62.72413  63.06746  63.41205</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="resiliency-visualizations.html#cb36-1"></a><span class="co">## Total RMSE between full model and mean absolute percentage comparison</span></span>
+<span id="cb36-2"><a href="resiliency-visualizations.html#cb36-2"></a><span class="kw">RMSE</span>(change_broken5, <span class="dt">parameter =</span> whole_rowsum, <span class="dt">type =</span> <span class="st">&quot;RMSE&quot;</span>)</span></code></pre></div>
+<pre><code>##       TAZ     LNHBC     LNHBO     LNHBW     LNNHB     LNREC 
+## 157.32682  64.12033  64.47307  62.72442  63.06746  63.41205</code></pre>
+<p>From the RMSE calculation results, we can see that each of the previous methods used to determine differences between the orignal data and the altered data vary slightly. For example, in the LNHBC term, the RMSE values differ slightly, ranging from 64.11984 to 64.12083, with absolute error returning a smaller value than each of the other methods, and the simple difference comparison returning a larger value. Interestingly, for LNHBC, the MAE and MAPE are identical at 64.12033. Similar trends follow for LNHBO, LNHB, and LNREC. LNHBW has a smallest overall RMSE value when absolute error is used, and a largest overall RMSE value when MAPE is used. The values for LNHBW range from 62.6392 to 62.72442. LNNHB similarly reports a lowest overall RMSE value when absolute error is used, however, the reported largest overall RMSE value is the same for MAE and MAPE, with a range from 63.06703 to 63.06791.</p>
+<p>LNHBC has an overall RMSE range of 9.910^{-4}, LNHBO has a range of just 0.00114, LNHBW a range of 0.0849, LNNHB a range of 8.810^{-4}, and LNREC a range of 0.00133. The trip purpose with the smallest overall RMSE range is LNHBC, while LNHBW has the highest RMSE range with 0.0849. THis indicates that LNHBW is the tirp purpose most negatively effected by the link break done for this analysis, as reported previously. LNHBC was the trip purpsoe with the highest level of resilience for this particular scenario.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="methodology.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["ceen_594r.pdf", "ceen_594r.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -24,7 +24,7 @@
 <meta name="author" content="Max Barnes" />
 
 
-<meta name="date" content="2020-11-30" />
+<meta name="date" content="2020-12-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="literature-review.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="resiliency-visualizations.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -152,13 +152,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3" data-path="methodology.html"><a href="methodology.html#simulating-a-broken-link-within-the-demonstration-model"><i class="fa fa-check"></i><b>3.3</b> Simulating a Broken Link Within the Demonstration Model</a></li>
 <li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#identifying-vulnerable-links"><i class="fa fa-check"></i><b>3.4</b> Identifying Vulnerable Links</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>4</b> References</a></li>
-<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a><ul>
-<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
-<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
-<li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="4" data-path="resiliency-visualizations.html"><a href="resiliency-visualizations.html"><i class="fa fa-check"></i><b>4</b> resiliency visualizations</a></li>
+<li class="chapter" data-level="5" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>5</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -318,11 +313,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="demonstration-model-framework" class="section level2">
 <h2><span class="header-section-number">3.2</span> Demonstration Model Framework</h2>
 <p>Figure 1 shows a schematic of the model framework.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="methodology.html#cb20-1"></a><span class="kw">include_graphics</span>(<span class="kw">rep</span>(<span class="st">&#39;images/model_framework.png&#39;</span>, <span class="dv">3</span>))</span></code></pre></div>
-<p><img src="images/model_framework.png" width="540" /><img src="images/model_framework.png" width="540" /><img src="images/model_framework.png" width="540" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="methodology.html#cb20-1"></a><span class="kw">include_graphics</span>((<span class="st">&#39;images/model_framework.png&#39;</span>))</span></code></pre></div>
+<p><img src="images/model_framework.png" width="540" /></p>
 <p>The framework has three main inputs:<br />
 A. Highway Network: The USTM model network was obtained from UDOT and forms the basis of the model.
-B. Productions: Zonal trip productions from the USTM model
+B. Productions: Zonal trip productions from the USTM model<br />
 C. Attractions: Zonal trip attractions from the USTM model</p>
 <p>The model individually calculates mode choice and destination choice logsum values for each trip purpose, and then combines these outputs together. Thus, steps 3 and 4 of the model contain “children” processes with several groups of repeated code, once for each trip purpose.</p>
 <p>The mode choice model framework currently implemented is based on the Roanoke, Virginia travel model that serves as a basis for much of the code in the model. The USTM mode choice model uses similar alternatives and parameters, and we anticipate conflating and combining these coefficients in the next few weeks. The mode choice model includes utility parameters for in-vehicle travel time, out-of-vehicle travel time, wait time, automobile operating cost, and other elements for each trip purpose. The mode choice alternatives are drive alone, shared ride, non-motorized, and transit (all modes). USTM relies on MPO-level mode choice models to handle transit use, but in this application, it is important to consider transit as an available alternative. Work is underway to convert the minimum WFRC transit skim among all modes into a single “transit” skim at the USTM zone level.</p>
@@ -332,14 +327,13 @@ C. Attractions: Zonal trip attractions from the USTM model</p>
 <div id="simulating-a-broken-link-within-the-demonstration-model" class="section level2">
 <h2><span class="header-section-number">3.3</span> Simulating a Broken Link Within the Demonstration Model</h2>
 <p>We conducted a sensitivity analysis where we simulated a broken highway link in our demonstration model to verify that the model was responding in an appropriate way. Figure 4 shows the change in the log sum value for each purpose resulting from breaking a single highway link across all trip purposes. In order to simulate the changes caused by a broken link, a link was removed from the network file; the model then uses updated highway travel times to compute the mode and destination choice log sums. In general, the change in log sums shows a reasonable response, but the link selected is a major facility for travel in all directions through Roanoke. We are currently investigating whether these unexpected results are the result of improper specification, or whether they reveal a genuine nuance within this particular application technique.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="methodology.html#cb21-1"></a><span class="kw">include_graphics</span>(<span class="kw">rep</span>(<span class="st">&#39;images/absolute_error_choropleth&#39;</span>, <span class="dv">3</span>))</span></code></pre></div>
-<p><img src="images/absolute_error_choropleth" /><!-- --><img src="images/absolute_error_choropleth" /><!-- --><img src="images/absolute_error_choropleth" /><!-- --></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="methodology.html#cb21-1"></a><span class="kw">include_graphics</span>(<span class="st">&#39;images/absolute_error_choropleth&#39;</span>)</span></code></pre></div>
+<p><img src="images/absolute_error_choropleth" /><!-- --></p>
 </div>
 <div id="identifying-vulnerable-links" class="section level2">
 <h2><span class="header-section-number">3.4</span> Identifying Vulnerable Links</h2>
 <p>It is necessary for us to identify links in the UTSM network whose breaks we could simulate in our analysis. The AEM (2017) study inspiring this current work identified nine physical threat categories and locations of elevated risk to highway facilities on the I-15 corridor; the present analysis requires that we identify highway links at risk anywhere in Utah, and thus cannot rely only on the identification completed by AEM. An alternative method to identifying links vulnerable to specific risks would be to simply make arbitrary cuts in the network at locations the TAC identifies that could be representative of unknown threats or suspected choke points in the USTM network. The Risk Priority Analysis completed by BIO-WEST (2020) shows Composite Threat Probability by Road Segment. We used this analysis to identify 40 locations in the UTSM network that are either posed with an elevated annual threat or identified as a choke point. We also desired to have a mix of urban and rural facilities to demonstrate the potential flexibility of our proposed technique.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="methodology.html#cb22-1"></a><span class="kw">include_graphics</span>(<span class="kw">rep</span>(<span class="st">&#39;images/risky_links.png&#39;</span>, <span class="dv">3</span>))</span></code></pre></div>
-<p><img src="images/risky_links.png" width="316" /><img src="images/risky_links.png" width="316" /><img src="images/risky_links.png" width="316" /></p>
+<p><img src="images/risky_links.png" width="316" /></p>
 
 </div>
 </div>
@@ -349,7 +343,7 @@ C. Attractions: Zonal trip attractions from the USTM model</p>
         </div>
       </div>
 <a href="literature-review.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="resiliency-visualizations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

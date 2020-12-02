@@ -1,4 +1,4 @@
-```{r echo = FALSE}
+```{r init, echo = FALSE}
 library(readxl)
 library(xtable)
 library(tidyverse)
@@ -50,7 +50,7 @@ C. Accessibility analysis considers how the population using the network has the
 
 We discuss studies within each family in turn.
 
-```{r, echo = FALSE}
+```{r table2, echo = FALSE}
 Table2 <- read_excel("Data/Table2.xlsx")
 Table2 %>%
   pander(caption = "Table 2. Network Performance Measures in Resiliency Analysis")

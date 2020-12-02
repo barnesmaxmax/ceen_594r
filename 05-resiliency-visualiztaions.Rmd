@@ -1,12 +1,3 @@
----
-title: "Resiliency Visualizations"
-author: "Max Barnes"
-date: "11/16/2020"
-output:
-  html_document: default
-  pdf_document: default
----
-
 ```{r setup, include=FALSE}
 library("arsenal")
 library("tidyr")
@@ -18,6 +9,7 @@ library("maptools")
 library("modelr")
 library("SimDesign")
 ```
+# resiliency visualizations
 
 In the following DCLS analysis and comparison between an original, fully functioning network and a broken network, one intersection was removed from the network, meaning no vehicles could traverse the area as usual. The intersection of Melrose Ave and Peters Creek Rd. Both links appear to be major routes, with 2 lanes traveling in all directions, and a signalized intersection used for traffic control. The intersections is surrounded by small businesses and a small shopping complex, that appears to be in the style of a strip mall, and there are neighborhoods in the vicinity. 
 
