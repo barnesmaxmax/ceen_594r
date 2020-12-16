@@ -24,7 +24,7 @@
 <meta name="author" content="Max Barnes" />
 
 
-<meta name="date" content="2020-12-04" />
+<meta name="date" content="2020-12-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,14 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
 
 
 <style type="text/css">
@@ -151,6 +159,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="methodology.html"><a href="methodology.html#demonstration-model-framework"><i class="fa fa-check"></i><b>3.2</b> Demonstration Model Framework</a></li>
 <li class="chapter" data-level="3.3" data-path="methodology.html"><a href="methodology.html#simulating-a-broken-link-within-the-demonstration-model"><i class="fa fa-check"></i><b>3.3</b> Simulating a Broken Link Within the Demonstration Model</a></li>
 <li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#identifying-vulnerable-links"><i class="fa fa-check"></i><b>3.4</b> Identifying Vulnerable Links</a></li>
+<li class="chapter" data-level="3.5" data-path="methodology.html"><a href="methodology.html#leaflet-visualization"><i class="fa fa-check"></i><b>3.5</b> Leaflet Visualization</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="resiliency-visualizations.html"><a href="resiliency-visualizations.html"><i class="fa fa-check"></i><b>4</b> resiliency visualizations</a></li>
 <li class="chapter" data-level="5" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>5</b> References</a></li>
@@ -182,139 +191,778 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="socioeconomic-data" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Socioeconomic Data</h3>
 <p>Let’s start by taking a look at the Socioeconomic data produced by the Utah Travel Study, conducted in 2012. This data summarizes information gathered from 10,000 randomly selected households in Utah. A small sampling is shown below:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="methodology.html#cb12-1"></a>sedata &lt;-<span class="st"> </span><span class="kw">read.dbf</span>(<span class="st">&quot;Data/SE_USTM_BASE2015.DBF&quot;</span>)</span>
-<span id="cb12-2"><a href="methodology.html#cb12-2"></a>sedata[<span class="kw">c</span>(<span class="dv">1200</span>,<span class="dv">3300</span>,<span class="dv">4500</span>,<span class="dv">5500</span>,<span class="dv">6000</span>,<span class="dv">7500</span>,<span class="dv">8000</span>,<span class="dv">8500</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>]</span></code></pre></div>
-<pre><code>##         Z CO_TAZID SA_TAZID CO_FIPS    CO_NAME SUBAREAID TOTHH  HHPOP HHSIZE
-## 1200 1200    19071        0      19      GRAND         0  76.7  184.6   2.41
-## 3300 3300    47051        0      47     UINTAH         0  60.8  217.0   3.57
-## 4500 4500   110642      642      11      DAVIS         1   0.0    0.0   0.00
-## 5500 5500   351642     1642      35  SALT LAKE         1 234.0  621.1   2.65
-## 6000 6000   492149     2149      49       UTAH         1 470.0 2074.2   4.41
-## 7500 7500    50776      776       5      CACHE         2   4.1   12.2   2.97
-## 8000 8000   530354      354      53 WASHINGTON         3  78.6  345.3   4.39
-## 8500 8500    43017       17      43     SUMMIT         4  82.8  212.5   2.56</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="methodology.html#cb13-1"></a>sedata &lt;-<span class="st"> </span><span class="kw">read.dbf</span>(<span class="st">&quot;Data/SE_USTM_BASE2015.DBF&quot;</span>)</span>
+<span id="cb13-2"><a href="methodology.html#cb13-2"></a><span class="kw">kable</span>(sedata[<span class="kw">c</span>(<span class="dv">1200</span>,<span class="dv">3300</span>,<span class="dv">4500</span>,<span class="dv">5500</span>,<span class="dv">6000</span>,<span class="dv">7500</span>,<span class="dv">8000</span>,<span class="dv">8500</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>])</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Z</th>
+<th align="right">CO_TAZID</th>
+<th align="right">SA_TAZID</th>
+<th align="right">CO_FIPS</th>
+<th align="left">CO_NAME</th>
+<th align="right">SUBAREAID</th>
+<th align="right">TOTHH</th>
+<th align="right">HHPOP</th>
+<th align="right">HHSIZE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1200</td>
+<td align="right">1200</td>
+<td align="right">19071</td>
+<td align="right">0</td>
+<td align="right">19</td>
+<td align="left">GRAND</td>
+<td align="right">0</td>
+<td align="right">76.7</td>
+<td align="right">184.6</td>
+<td align="right">2.41</td>
+</tr>
+<tr class="even">
+<td align="left">3300</td>
+<td align="right">3300</td>
+<td align="right">47051</td>
+<td align="right">0</td>
+<td align="right">47</td>
+<td align="left">UINTAH</td>
+<td align="right">0</td>
+<td align="right">60.8</td>
+<td align="right">217.0</td>
+<td align="right">3.57</td>
+</tr>
+<tr class="odd">
+<td align="left">4500</td>
+<td align="right">4500</td>
+<td align="right">110642</td>
+<td align="right">642</td>
+<td align="right">11</td>
+<td align="left">DAVIS</td>
+<td align="right">1</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">5500</td>
+<td align="right">5500</td>
+<td align="right">351642</td>
+<td align="right">1642</td>
+<td align="right">35</td>
+<td align="left">SALT LAKE</td>
+<td align="right">1</td>
+<td align="right">234.0</td>
+<td align="right">621.1</td>
+<td align="right">2.65</td>
+</tr>
+<tr class="odd">
+<td align="left">6000</td>
+<td align="right">6000</td>
+<td align="right">492149</td>
+<td align="right">2149</td>
+<td align="right">49</td>
+<td align="left">UTAH</td>
+<td align="right">1</td>
+<td align="right">470.0</td>
+<td align="right">2074.2</td>
+<td align="right">4.41</td>
+</tr>
+<tr class="even">
+<td align="left">7500</td>
+<td align="right">7500</td>
+<td align="right">50776</td>
+<td align="right">776</td>
+<td align="right">5</td>
+<td align="left">CACHE</td>
+<td align="right">2</td>
+<td align="right">4.1</td>
+<td align="right">12.2</td>
+<td align="right">2.97</td>
+</tr>
+<tr class="odd">
+<td align="left">8000</td>
+<td align="right">8000</td>
+<td align="right">530354</td>
+<td align="right">354</td>
+<td align="right">53</td>
+<td align="left">WASHINGTON</td>
+<td align="right">3</td>
+<td align="right">78.6</td>
+<td align="right">345.3</td>
+<td align="right">4.39</td>
+</tr>
+<tr class="even">
+<td align="left">8500</td>
+<td align="right">8500</td>
+<td align="right">43017</td>
+<td align="right">17</td>
+<td align="right">43</td>
+<td align="left">SUMMIT</td>
+<td align="right">4</td>
+<td align="right">82.8</td>
+<td align="right">212.5</td>
+<td align="right">2.56</td>
+</tr>
+</tbody>
+</table>
 <p>Here, we can see the attributes associated with each of the households on record. Some of the geographic areas in Utah are associated with MPOs, as indicated in the SUBAREAID column. There are only 4 MPOs in Utah, so many households, such as those in Grand and Uintah counites, do not have TAZIDs associated with them. We will also look at a summary of this data set:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="methodology.html#cb14-1"></a><span class="kw">summary</span>(sedata)</span></code></pre></div>
-<pre><code>##        Z           CO_TAZID         SA_TAZID         CO_FIPS    
-##  Min.   :   1   Min.   :     0   Min.   :   0.0   Min.   : 0.0  
-##  1st Qu.:2194   1st Qu.: 30002   1st Qu.:   0.0   1st Qu.:15.0  
-##  Median :4388   Median : 50576   Median : 131.0   Median :35.0  
-##  Mean   :4388   Mean   :197415   Mean   : 562.2   Mean   :32.2  
-##  3rd Qu.:6582   3rd Qu.:491796   3rd Qu.: 811.0   3rd Qu.:49.0  
-##  Max.   :8775   Max.   :570420   Max.   :2873.0   Max.   :57.0  
-##                                                                 
-##        CO_NAME       SUBAREAID          TOTHH            HHPOP       
-##  SALT LAKE :1146   Min.   :0.0000   Min.   :   0.0   Min.   :   0.0  
-##  UTAH      :1098   1st Qu.:0.0000   1st Qu.:   1.1   1st Qu.:   3.0  
-##  CACHE     : 922   Median :1.0000   Median :  16.1   Median :  46.6  
-##  WASHINGTON: 837   Mean   :0.9551   Mean   : 112.8   Mean   : 336.8  
-##  BOX ELDER : 437   3rd Qu.:1.0000   3rd Qu.: 124.0   3rd Qu.: 357.8  
-##  MILLARD   : 411   Max.   :4.0000   Max.   :2750.0   Max.   :7507.1  
-##  (Other)   :3924                                                     
-##      HHSIZE           TOTEMP             RETEMP            INDEMP       
-##  Min.   : 0.000   Min.   :    0.00   Min.   :   0.00   Min.   :   0.00  
-##  1st Qu.: 1.690   1st Qu.:    0.00   1st Qu.:   0.00   1st Qu.:   0.00  
-##  Median : 2.680   Median :    3.90   Median :   0.00   Median :   0.00  
-##  Mean   : 2.323   Mean   :  186.06   Mean   :  34.16   Mean   :  28.48  
-##  3rd Qu.: 3.230   3rd Qu.:   86.65   3rd Qu.:   5.90   3rd Qu.:   2.60  
-##  Max.   :11.880   Max.   :21274.00   Max.   :3073.00   Max.   :7881.00  
-##                                                                         
-##      OTHEMP            ALLEMP             RETL             FOOD        
-##  Min.   :    0.0   Min.   :    0.0   Min.   :   0.0   Min.   :   0.00  
-##  1st Qu.:    0.0   1st Qu.:    2.3   1st Qu.:   0.0   1st Qu.:   0.00  
-##  Median :    1.3   Median :   17.9   Median :   0.0   Median :   0.00  
-##  Mean   :  123.4   Mean   :  212.4   Mean   :  21.7   Mean   :  12.46  
-##  3rd Qu.:   51.0   3rd Qu.:  131.8   3rd Qu.:   2.1   3rd Qu.:   0.00  
-##  Max.   :21081.0   Max.   :21274.0   Max.   :2281.0   Max.   :1800.00  
-##                                                                        
-##       MANU              WSLE              OFFI             GVED         
-##  Min.   :   0.00   Min.   :   0.00   Min.   :   0.0   Min.   :    0.00  
-##  1st Qu.:   0.00   1st Qu.:   0.00   1st Qu.:   0.0   1st Qu.:    0.00  
-##  Median :   0.00   Median :   0.00   Median :   0.0   Median :    0.00  
-##  Mean   :  14.99   Mean   :  13.49   Mean   :  20.7   Mean   :   34.45  
-##  3rd Qu.:   0.00   3rd Qu.:   1.00   3rd Qu.:   1.7   3rd Qu.:    4.00  
-##  Max.   :5321.00   Max.   :7881.00   Max.   :3598.0   Max.   :18890.00  
-##                                                                         
-##       HLTH              OTHR              AGRI              MING         
-##  Min.   :   0.00   Min.   :   0.00   Min.   :  0.000   Min.   :   0.000  
-##  1st Qu.:   0.00   1st Qu.:   0.00   1st Qu.:  0.000   1st Qu.:   0.000  
-##  Median :   0.00   Median :   0.00   Median :  0.000   Median :   0.000  
-##  Mean   :  17.02   Mean   :  51.26   Mean   :  2.002   Mean   :   1.756  
-##  3rd Qu.:   0.00   3rd Qu.:  15.00   3rd Qu.:  0.000   3rd Qu.:   0.000  
-##  Max.   :7491.00   Max.   :5548.00   Max.   :344.700   Max.   :1597.000  
-##                                                                          
-##       CONS              HBJ             SEC_HOME           CABIN         
-##  Min.   :   0.00   Min.   :  0.000   Min.   :  0.000   Min.   :  0.0000  
-##  1st Qu.:   0.00   1st Qu.:  0.100   1st Qu.:  0.000   1st Qu.:  0.0000  
-##  Median :   0.00   Median :  1.100   Median :  0.000   Median :  0.0000  
-##  Mean   :  13.42   Mean   :  9.145   Mean   :  2.944   Mean   :  0.2547  
-##  3rd Qu.:   5.00   3rd Qu.:  9.000   3rd Qu.:  0.000   3rd Qu.:  0.0000  
-##  Max.   :2930.20   Max.   :259.000   Max.   :656.000   Max.   :573.0000  
-##                                                                          
-##      CONDO               HOTEL            AVGINCOME        ENROL_ELEM     
-##  Min.   :   0.0000   Min.   :  0.0000   Min.   :     0   Min.   :   0.00  
-##  1st Qu.:   0.0000   1st Qu.:  0.0000   1st Qu.: 43378   1st Qu.:   0.00  
-##  Median :   0.0000   Median :  0.0000   Median : 51783   Median :   0.00  
-##  Mean   :   0.5927   Mean   :  0.2206   Mean   : 54308   Mean   :  39.28  
-##  3rd Qu.:   0.0000   3rd Qu.:  0.0000   3rd Qu.: 63602   3rd Qu.:   0.00  
-##  Max.   :1044.0000   Max.   :312.0000   Max.   :208873   Max.   :2462.00  
-##                                                                           
-##    ENROL_MIDL        ENROL_HIGH     
-##  Min.   :   0.00   Min.   :   0.00  
-##  1st Qu.:   0.00   1st Qu.:   0.00  
-##  Median :   0.00   Median :   0.00  
-##  Mean   :  17.11   Mean   :  16.44  
-##  3rd Qu.:   0.00   3rd Qu.:   0.00  
-##  Max.   :2271.00   Max.   :3086.00  
-## </code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="methodology.html#cb14-1"></a><span class="kw">kable</span>(<span class="kw">summary</span>(sedata))</span></code></pre></div>
+<table style="width:100%;">
+<colgroup>
+<col width="0%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="3%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="3%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="3%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Z</th>
+<th align="left">CO_TAZID</th>
+<th align="left">SA_TAZID</th>
+<th align="left">CO_FIPS</th>
+<th align="left">CO_NAME</th>
+<th align="left">SUBAREAID</th>
+<th align="left">TOTHH</th>
+<th align="left">HHPOP</th>
+<th align="left">HHSIZE</th>
+<th align="left">TOTEMP</th>
+<th align="left">RETEMP</th>
+<th align="left">INDEMP</th>
+<th align="left">OTHEMP</th>
+<th align="left">ALLEMP</th>
+<th align="left">RETL</th>
+<th align="left">FOOD</th>
+<th align="left">MANU</th>
+<th align="left">WSLE</th>
+<th align="left">OFFI</th>
+<th align="left">GVED</th>
+<th align="left">HLTH</th>
+<th align="left">OTHR</th>
+<th align="left">AGRI</th>
+<th align="left">MING</th>
+<th align="left">CONS</th>
+<th align="left">HBJ</th>
+<th align="left">SEC_HOME</th>
+<th align="left">CABIN</th>
+<th align="left">CONDO</th>
+<th align="left">HOTEL</th>
+<th align="left">AVGINCOME</th>
+<th align="left">ENROL_ELEM</th>
+<th align="left">ENROL_MIDL</th>
+<th align="left">ENROL_HIGH</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">Min. : 1</td>
+<td align="left">Min. : 0</td>
+<td align="left">Min. : 0.0</td>
+<td align="left">Min. : 0.0</td>
+<td align="left">SALT LAKE :1146</td>
+<td align="left">Min. :0.0000</td>
+<td align="left">Min. : 0.0</td>
+<td align="left">Min. : 0.0</td>
+<td align="left">Min. : 0.000</td>
+<td align="left">Min. : 0.00</td>
+<td align="left">Min. : 0.00</td>
+<td align="left">Min. : 0.00</td>
+<td align="left">Min. : 0.0</td>
+<td align="left">Min. : 0.0</td>
+<td align="left">Min. : 0.0</td>
+<td align="left">Min. : 0.00</td>
+<td align="left">Min. : 0.00</td>
+<td align="left">Min. : 0.00</td>
+<td align="left">Min. : 0.0</td>
+<td align="left">Min. : 0.00</td>
+<td align="left">Min. : 0.00</td>
+<td align="left">Min. : 0.00</td>
+<td align="left">Min. : 0.000</td>
+<td align="left">Min. : 0.000</td>
+<td align="left">Min. : 0.00</td>
+<td align="left">Min. : 0.000</td>
+<td align="left">Min. : 0.000</td>
+<td align="left">Min. : 0.0000</td>
+<td align="left">Min. : 0.0000</td>
+<td align="left">Min. : 0.0000</td>
+<td align="left">Min. : 0</td>
+<td align="left">Min. : 0.00</td>
+<td align="left">Min. : 0.00</td>
+<td align="left">Min. : 0.00</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">1st Qu.:2194</td>
+<td align="left">1st Qu.: 30002</td>
+<td align="left">1st Qu.: 0.0</td>
+<td align="left">1st Qu.:15.0</td>
+<td align="left">UTAH :1098</td>
+<td align="left">1st Qu.:0.0000</td>
+<td align="left">1st Qu.: 1.1</td>
+<td align="left">1st Qu.: 3.0</td>
+<td align="left">1st Qu.: 1.690</td>
+<td align="left">1st Qu.: 0.00</td>
+<td align="left">1st Qu.: 0.00</td>
+<td align="left">1st Qu.: 0.00</td>
+<td align="left">1st Qu.: 0.0</td>
+<td align="left">1st Qu.: 2.3</td>
+<td align="left">1st Qu.: 0.0</td>
+<td align="left">1st Qu.: 0.00</td>
+<td align="left">1st Qu.: 0.00</td>
+<td align="left">1st Qu.: 0.00</td>
+<td align="left">1st Qu.: 0.0</td>
+<td align="left">1st Qu.: 0.00</td>
+<td align="left">1st Qu.: 0.00</td>
+<td align="left">1st Qu.: 0.00</td>
+<td align="left">1st Qu.: 0.000</td>
+<td align="left">1st Qu.: 0.000</td>
+<td align="left">1st Qu.: 0.00</td>
+<td align="left">1st Qu.: 0.100</td>
+<td align="left">1st Qu.: 0.000</td>
+<td align="left">1st Qu.: 0.0000</td>
+<td align="left">1st Qu.: 0.0000</td>
+<td align="left">1st Qu.: 0.0000</td>
+<td align="left">1st Qu.: 43378</td>
+<td align="left">1st Qu.: 0.00</td>
+<td align="left">1st Qu.: 0.00</td>
+<td align="left">1st Qu.: 0.00</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">Median :4388</td>
+<td align="left">Median : 50576</td>
+<td align="left">Median : 131.0</td>
+<td align="left">Median :35.0</td>
+<td align="left">CACHE : 922</td>
+<td align="left">Median :1.0000</td>
+<td align="left">Median : 16.1</td>
+<td align="left">Median : 46.6</td>
+<td align="left">Median : 2.680</td>
+<td align="left">Median : 3.90</td>
+<td align="left">Median : 0.00</td>
+<td align="left">Median : 0.00</td>
+<td align="left">Median : 1.3</td>
+<td align="left">Median : 17.9</td>
+<td align="left">Median : 0.0</td>
+<td align="left">Median : 0.00</td>
+<td align="left">Median : 0.00</td>
+<td align="left">Median : 0.00</td>
+<td align="left">Median : 0.0</td>
+<td align="left">Median : 0.00</td>
+<td align="left">Median : 0.00</td>
+<td align="left">Median : 0.00</td>
+<td align="left">Median : 0.000</td>
+<td align="left">Median : 0.000</td>
+<td align="left">Median : 0.00</td>
+<td align="left">Median : 1.100</td>
+<td align="left">Median : 0.000</td>
+<td align="left">Median : 0.0000</td>
+<td align="left">Median : 0.0000</td>
+<td align="left">Median : 0.0000</td>
+<td align="left">Median : 51783</td>
+<td align="left">Median : 0.00</td>
+<td align="left">Median : 0.00</td>
+<td align="left">Median : 0.00</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">Mean :4388</td>
+<td align="left">Mean :197415</td>
+<td align="left">Mean : 562.2</td>
+<td align="left">Mean :32.2</td>
+<td align="left">WASHINGTON: 837</td>
+<td align="left">Mean :0.9551</td>
+<td align="left">Mean : 112.8</td>
+<td align="left">Mean : 336.8</td>
+<td align="left">Mean : 2.323</td>
+<td align="left">Mean : 186.06</td>
+<td align="left">Mean : 34.16</td>
+<td align="left">Mean : 28.48</td>
+<td align="left">Mean : 123.4</td>
+<td align="left">Mean : 212.4</td>
+<td align="left">Mean : 21.7</td>
+<td align="left">Mean : 12.46</td>
+<td align="left">Mean : 14.99</td>
+<td align="left">Mean : 13.49</td>
+<td align="left">Mean : 20.7</td>
+<td align="left">Mean : 34.45</td>
+<td align="left">Mean : 17.02</td>
+<td align="left">Mean : 51.26</td>
+<td align="left">Mean : 2.002</td>
+<td align="left">Mean : 1.756</td>
+<td align="left">Mean : 13.42</td>
+<td align="left">Mean : 9.145</td>
+<td align="left">Mean : 2.944</td>
+<td align="left">Mean : 0.2547</td>
+<td align="left">Mean : 0.5927</td>
+<td align="left">Mean : 0.2206</td>
+<td align="left">Mean : 54308</td>
+<td align="left">Mean : 39.28</td>
+<td align="left">Mean : 17.11</td>
+<td align="left">Mean : 16.44</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">3rd Qu.:6582</td>
+<td align="left">3rd Qu.:491796</td>
+<td align="left">3rd Qu.: 811.0</td>
+<td align="left">3rd Qu.:49.0</td>
+<td align="left">BOX ELDER : 437</td>
+<td align="left">3rd Qu.:1.0000</td>
+<td align="left">3rd Qu.: 124.0</td>
+<td align="left">3rd Qu.: 357.8</td>
+<td align="left">3rd Qu.: 3.230</td>
+<td align="left">3rd Qu.: 86.65</td>
+<td align="left">3rd Qu.: 5.90</td>
+<td align="left">3rd Qu.: 2.60</td>
+<td align="left">3rd Qu.: 51.0</td>
+<td align="left">3rd Qu.: 131.8</td>
+<td align="left">3rd Qu.: 2.1</td>
+<td align="left">3rd Qu.: 0.00</td>
+<td align="left">3rd Qu.: 0.00</td>
+<td align="left">3rd Qu.: 1.00</td>
+<td align="left">3rd Qu.: 1.7</td>
+<td align="left">3rd Qu.: 4.00</td>
+<td align="left">3rd Qu.: 0.00</td>
+<td align="left">3rd Qu.: 15.00</td>
+<td align="left">3rd Qu.: 0.000</td>
+<td align="left">3rd Qu.: 0.000</td>
+<td align="left">3rd Qu.: 5.00</td>
+<td align="left">3rd Qu.: 9.000</td>
+<td align="left">3rd Qu.: 0.000</td>
+<td align="left">3rd Qu.: 0.0000</td>
+<td align="left">3rd Qu.: 0.0000</td>
+<td align="left">3rd Qu.: 0.0000</td>
+<td align="left">3rd Qu.: 63602</td>
+<td align="left">3rd Qu.: 0.00</td>
+<td align="left">3rd Qu.: 0.00</td>
+<td align="left">3rd Qu.: 0.00</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">Max. :8775</td>
+<td align="left">Max. :570420</td>
+<td align="left">Max. :2873.0</td>
+<td align="left">Max. :57.0</td>
+<td align="left">MILLARD : 411</td>
+<td align="left">Max. :4.0000</td>
+<td align="left">Max. :2750.0</td>
+<td align="left">Max. :7507.1</td>
+<td align="left">Max. :11.880</td>
+<td align="left">Max. :21274.00</td>
+<td align="left">Max. :3073.00</td>
+<td align="left">Max. :7881.00</td>
+<td align="left">Max. :21081.0</td>
+<td align="left">Max. :21274.0</td>
+<td align="left">Max. :2281.0</td>
+<td align="left">Max. :1800.00</td>
+<td align="left">Max. :5321.00</td>
+<td align="left">Max. :7881.00</td>
+<td align="left">Max. :3598.0</td>
+<td align="left">Max. :18890.00</td>
+<td align="left">Max. :7491.00</td>
+<td align="left">Max. :5548.00</td>
+<td align="left">Max. :344.700</td>
+<td align="left">Max. :1597.000</td>
+<td align="left">Max. :2930.20</td>
+<td align="left">Max. :259.000</td>
+<td align="left">Max. :656.000</td>
+<td align="left">Max. :573.0000</td>
+<td align="left">Max. :1044.0000</td>
+<td align="left">Max. :312.0000</td>
+<td align="left">Max. :208873</td>
+<td align="left">Max. :2462.00</td>
+<td align="left">Max. :2271.00</td>
+<td align="left">Max. :3086.00</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">(Other) :3924</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="mc-constans-and-coefficients" class="section level3">
 <h3><span class="header-section-number">3.1.2</span> MC Constans and Coefficients</h3>
 <p>Lets also take a look at the Mode Choice constants and coefficients:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="methodology.html#cb16-1"></a>mcconst &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/MC_Constants.csv&quot;</span>)</span>
-<span id="cb16-2"><a href="methodology.html#cb16-2"></a>mcconst</span></code></pre></div>
-<pre><code>##    X.N   Name     HBW     HBO     NHB     HBC REC
-## 1    1   K_SR -1.1703  0.0164 -0.0336 -1.1685  -1
-## 2    2  K_TRN -0.3903 -1.9811 -2.2714  0.3261  -1
-## 3    3 K_NMOT -1.2258 -0.3834 -0.8655 -1.2505  -1
-## 4    4 K_PREM  0.0000  0.0000  0.0000  0.0000   0
-## 5    5         0.0000  0.0000  0.0000  0.0000   0
-## 6    6         0.0000  0.0000  0.0000  0.0000   0
-## 7    7         0.0000  0.0000  0.0000  0.0000   0
-## 8    8         0.0000  0.0000  0.0000  0.0000   0
-## 9    9         0.0000  0.0000  0.0000  0.0000   0
-## 10  10         0.0000  0.0000  0.0000  0.0000   0</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="methodology.html#cb18-1"></a>mccoeff &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/MC_Coefficients.csv&quot;</span>)</span>
-<span id="cb18-2"><a href="methodology.html#cb18-2"></a>mccoeff</span></code></pre></div>
-<pre><code>##    X.N          Name      HBW      HBO      NHB      HBC      REC
-## 1    1      CIVTT    -0.02500 -0.01500 -0.02000 -0.01500 -0.01500
-## 2    2      CSWAIT   -0.05625 -0.03375 -0.04500 -0.03375 -0.03375
-## 3    3      CLWAIT   -0.02500 -0.01500 -0.02000 -0.01500 -0.01200
-## 4    4      CXWAIT   -0.06250 -0.03750 -0.05000 -0.03750 -0.03750
-## 5    5         CCOST -0.00158 -0.00237 -0.00253 -0.18000 -0.18000
-## 6    6      CDRIVE   -0.05625 -0.03375 -0.04500 -0.03375 -0.03375
-## 7    7      CTERML   -0.06250 -0.03750 -0.05000 -0.06250 -0.06250
-## 8    8      CWALK    -0.06250 -0.03750 -0.05000 -0.03750 -0.03750
-## 9    9      CWALK1   -0.06250 -0.03750 -0.05000 -0.03750 -0.03750
-## 10  10      CWALK2   -0.09375 -0.05625 -0.07500 -0.05625 -0.05625
-## 11  11      CBIKE1   -0.06250 -0.03750 -0.05000 -0.03750 -0.03750
-## 12  12      CBIKE2   -0.09375 -0.05625 -0.07500 -0.05625 -0.05625
-## 13  13 DWalkBIKE      1.00000  1.00000  1.00000  1.00000  1.00000
-## 14  14           NC1  0.50000  0.50000  0.50000  0.50000  0.50000
-## 15  15           NC2  0.50000  0.50000  0.50000  0.50000  0.50000
-## 16  16           NC3  0.50000  0.50000  0.50000  0.50000  0.50000
-## 17  17           CBD  0.00000  0.00000  0.00000  0.00000  0.00000
-## 18  18         NXFER  0.00000  0.00000  0.00000  0.00000  0.00000
-## 19  19      AUTOCOST 13.60000 13.60000 13.60000 13.60000 13.60000
-## 20  20      SHAREFAC  2.00000  2.00000  2.00000  2.00000  2.00000</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="methodology.html#cb15-1"></a>mcconst &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/MC_Constants.csv&quot;</span>)</span>
+<span id="cb15-2"><a href="methodology.html#cb15-2"></a><span class="kw">kable</span>(mcconst)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">X.N</th>
+<th align="left">Name</th>
+<th align="right">HBW</th>
+<th align="right">HBO</th>
+<th align="right">NHB</th>
+<th align="right">HBC</th>
+<th align="right">REC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">K_SR</td>
+<td align="right">-1.1703</td>
+<td align="right">0.0164</td>
+<td align="right">-0.0336</td>
+<td align="right">-1.1685</td>
+<td align="right">-1</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">K_TRN</td>
+<td align="right">-0.3903</td>
+<td align="right">-1.9811</td>
+<td align="right">-2.2714</td>
+<td align="right">0.3261</td>
+<td align="right">-1</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">K_NMOT</td>
+<td align="right">-1.2258</td>
+<td align="right">-0.3834</td>
+<td align="right">-0.8655</td>
+<td align="right">-1.2505</td>
+<td align="right">-1</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="left">K_PREM</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="left"></td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="left"></td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="left"></td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="left"></td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="left"></td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="left"></td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0.0000</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="methodology.html#cb16-1"></a>mccoeff &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/MC_Coefficients.csv&quot;</span>)</span>
+<span id="cb16-2"><a href="methodology.html#cb16-2"></a><span class="kw">kable</span>(mccoeff)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">X.N</th>
+<th align="left">Name</th>
+<th align="right">HBW</th>
+<th align="right">HBO</th>
+<th align="right">NHB</th>
+<th align="right">HBC</th>
+<th align="right">REC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">CIVTT</td>
+<td align="right">-0.02500</td>
+<td align="right">-0.01500</td>
+<td align="right">-0.02000</td>
+<td align="right">-0.01500</td>
+<td align="right">-0.01500</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">CSWAIT</td>
+<td align="right">-0.05625</td>
+<td align="right">-0.03375</td>
+<td align="right">-0.04500</td>
+<td align="right">-0.03375</td>
+<td align="right">-0.03375</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">CLWAIT</td>
+<td align="right">-0.02500</td>
+<td align="right">-0.01500</td>
+<td align="right">-0.02000</td>
+<td align="right">-0.01500</td>
+<td align="right">-0.01200</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="left">CXWAIT</td>
+<td align="right">-0.06250</td>
+<td align="right">-0.03750</td>
+<td align="right">-0.05000</td>
+<td align="right">-0.03750</td>
+<td align="right">-0.03750</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="left">CCOST</td>
+<td align="right">-0.00158</td>
+<td align="right">-0.00237</td>
+<td align="right">-0.00253</td>
+<td align="right">-0.18000</td>
+<td align="right">-0.18000</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="left">CDRIVE</td>
+<td align="right">-0.05625</td>
+<td align="right">-0.03375</td>
+<td align="right">-0.04500</td>
+<td align="right">-0.03375</td>
+<td align="right">-0.03375</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="left">CTERML</td>
+<td align="right">-0.06250</td>
+<td align="right">-0.03750</td>
+<td align="right">-0.05000</td>
+<td align="right">-0.06250</td>
+<td align="right">-0.06250</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="left">CWALK</td>
+<td align="right">-0.06250</td>
+<td align="right">-0.03750</td>
+<td align="right">-0.05000</td>
+<td align="right">-0.03750</td>
+<td align="right">-0.03750</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="left">CWALK1</td>
+<td align="right">-0.06250</td>
+<td align="right">-0.03750</td>
+<td align="right">-0.05000</td>
+<td align="right">-0.03750</td>
+<td align="right">-0.03750</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="left">CWALK2</td>
+<td align="right">-0.09375</td>
+<td align="right">-0.05625</td>
+<td align="right">-0.07500</td>
+<td align="right">-0.05625</td>
+<td align="right">-0.05625</td>
+</tr>
+<tr class="odd">
+<td align="right">11</td>
+<td align="left">CBIKE1</td>
+<td align="right">-0.06250</td>
+<td align="right">-0.03750</td>
+<td align="right">-0.05000</td>
+<td align="right">-0.03750</td>
+<td align="right">-0.03750</td>
+</tr>
+<tr class="even">
+<td align="right">12</td>
+<td align="left">CBIKE2</td>
+<td align="right">-0.09375</td>
+<td align="right">-0.05625</td>
+<td align="right">-0.07500</td>
+<td align="right">-0.05625</td>
+<td align="right">-0.05625</td>
+</tr>
+<tr class="odd">
+<td align="right">13</td>
+<td align="left">DWalkBIKE</td>
+<td align="right">1.00000</td>
+<td align="right">1.00000</td>
+<td align="right">1.00000</td>
+<td align="right">1.00000</td>
+<td align="right">1.00000</td>
+</tr>
+<tr class="even">
+<td align="right">14</td>
+<td align="left">NC1</td>
+<td align="right">0.50000</td>
+<td align="right">0.50000</td>
+<td align="right">0.50000</td>
+<td align="right">0.50000</td>
+<td align="right">0.50000</td>
+</tr>
+<tr class="odd">
+<td align="right">15</td>
+<td align="left">NC2</td>
+<td align="right">0.50000</td>
+<td align="right">0.50000</td>
+<td align="right">0.50000</td>
+<td align="right">0.50000</td>
+<td align="right">0.50000</td>
+</tr>
+<tr class="even">
+<td align="right">16</td>
+<td align="left">NC3</td>
+<td align="right">0.50000</td>
+<td align="right">0.50000</td>
+<td align="right">0.50000</td>
+<td align="right">0.50000</td>
+<td align="right">0.50000</td>
+</tr>
+<tr class="odd">
+<td align="right">17</td>
+<td align="left">CBD</td>
+<td align="right">0.00000</td>
+<td align="right">0.00000</td>
+<td align="right">0.00000</td>
+<td align="right">0.00000</td>
+<td align="right">0.00000</td>
+</tr>
+<tr class="even">
+<td align="right">18</td>
+<td align="left">NXFER</td>
+<td align="right">0.00000</td>
+<td align="right">0.00000</td>
+<td align="right">0.00000</td>
+<td align="right">0.00000</td>
+<td align="right">0.00000</td>
+</tr>
+<tr class="odd">
+<td align="right">19</td>
+<td align="left">AUTOCOST</td>
+<td align="right">13.60000</td>
+<td align="right">13.60000</td>
+<td align="right">13.60000</td>
+<td align="right">13.60000</td>
+<td align="right">13.60000</td>
+</tr>
+<tr class="even">
+<td align="right">20</td>
+<td align="left">SHAREFAC</td>
+<td align="right">2.00000</td>
+<td align="right">2.00000</td>
+<td align="right">2.00000</td>
+<td align="right">2.00000</td>
+<td align="right">2.00000</td>
+</tr>
+</tbody>
+</table>
 <p>The Mode Choice Constants and Coefficients are used to help weight the inputs to correctly determine the Mode Choice Logsum output, that serves as the impedance term in the Destination Choice Logsum calculation. These inputs are taken from the Oregen Statewide Travel Model, and from the Roanokoke Valley Transportation Planning Organization. The Oregon model had well suited data for each of the five trip types except Home-based work trips, which is why we used the RVTPO data for HBW trip purposes.</p>
 </div>
 </div>
 <div id="demonstration-model-framework" class="section level2">
 <h2><span class="header-section-number">3.2</span> Demonstration Model Framework</h2>
-<p>Figure 1 shows a schematic of the model framework.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="methodology.html#cb20-1"></a><span class="kw">include_graphics</span>((<span class="st">&#39;images/model_framework.png&#39;</span>))</span></code></pre></div>
-<p><img src="images/model_framework.png" width="540" /></p>
+<p>Figure 1 shows a schematic of the model framework.
+<img src="images/model_framework.png" width="540" /></p>
 <p>The framework has three main inputs:<br />
 A. Highway Network: The USTM model network was obtained from UDOT and forms the basis of the model.
 B. Productions: Zonal trip productions from the USTM model<br />
@@ -327,13 +975,17 @@ C. Attractions: Zonal trip attractions from the USTM model</p>
 <div id="simulating-a-broken-link-within-the-demonstration-model" class="section level2">
 <h2><span class="header-section-number">3.3</span> Simulating a Broken Link Within the Demonstration Model</h2>
 <p>We conducted a sensitivity analysis where we simulated a broken highway link in our demonstration model to verify that the model was responding in an appropriate way. Figure 4 shows the change in the log sum value for each purpose resulting from breaking a single highway link across all trip purposes. In order to simulate the changes caused by a broken link, a link was removed from the network file; the model then uses updated highway travel times to compute the mode and destination choice log sums. In general, the change in log sums shows a reasonable response, but the link selected is a major facility for travel in all directions through Roanoke. We are currently investigating whether these unexpected results are the result of improper specification, or whether they reveal a genuine nuance within this particular application technique.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="methodology.html#cb21-1"></a><span class="kw">include_graphics</span>(<span class="st">&#39;images/absolute_error_choropleth&#39;</span>)</span></code></pre></div>
 <p><img src="images/absolute_error_choropleth" /><!-- --></p>
 </div>
 <div id="identifying-vulnerable-links" class="section level2">
 <h2><span class="header-section-number">3.4</span> Identifying Vulnerable Links</h2>
 <p>It is necessary for us to identify links in the UTSM network whose breaks we could simulate in our analysis. The AEM (2017) study inspiring this current work identified nine physical threat categories and locations of elevated risk to highway facilities on the I-15 corridor; the present analysis requires that we identify highway links at risk anywhere in Utah, and thus cannot rely only on the identification completed by AEM. An alternative method to identifying links vulnerable to specific risks would be to simply make arbitrary cuts in the network at locations the TAC identifies that could be representative of unknown threats or suspected choke points in the USTM network. The Risk Priority Analysis completed by BIO-WEST (2020) shows Composite Threat Probability by Road Segment. We used this analysis to identify 40 locations in the UTSM network that are either posed with an elevated annual threat or identified as a choke point. We also desired to have a mix of urban and rural facilities to demonstrate the potential flexibility of our proposed technique.</p>
 <p><img src="images/risky_links.png" width="316" /></p>
+</div>
+<div id="leaflet-visualization" class="section level2">
+<h2><span class="header-section-number">3.5</span> Leaflet Visualization</h2>
+<div id="htmlwidget-5aab25643c02bbcedb4b" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5aab25643c02bbcedb4b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-79.9357,37.281,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Roanoke, VA",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-79.9357,-79.9357],"lng":[37.281,37.281]}},"evals":[],"jsHooks":[]}</script>
 
 </div>
 </div>

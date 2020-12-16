@@ -1,6 +1,9 @@
 ```{r init2, echo = FALSE}
 library("foreign")
+library("leaflet")
 library("knitr")
+library("sf")
+library("sp")
 ```
 
 # Methodology
@@ -36,7 +39,7 @@ The Mode Choice Constants and Coefficients are used to help weight the inputs to
 ## Demonstration Model Framework
 
 Figure 1 shows a schematic of the model framework. 
-```{r image1. echo = FALSE}
+```{r image1, echo = FALSE}
 include_graphics(('images/model_framework.png'))
 ```
 
@@ -69,4 +72,14 @@ It is necessary for us to identify links in the UTSM network whose breaks we cou
 include_graphics('images/risky_links.png')
 ```
 
-
+## Leaflet Visualization
+```{r map, echo = FALSE}
+map <- st_read("Data/RoanokeTAZ.shp")    
+map <- st_transform(map, CRS("+proj=longlat +ellps=GRS80"))
+m <- leaflet() %>% setView(lng = -79.9414, lat = 37.2710, zoom = 11) %>% addTiles() %>%
+  addPolygons(data=map,weight=1,col = 'black',smoothFactor = 0.5,
+    opacity = 1.0, fillOpacity = 1,fillColor = ~colorQuantile("Blues", broken_rowsum$LNHBW)(broken_rowsum$LNHBW),
+    highlightOptions = highlightOptions(color = "orange", weight = 3,
+      bringToFront = TRUE))
+m
+```
