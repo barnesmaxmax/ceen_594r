@@ -12,23 +12,23 @@ The USTM Resiliency project uses many input data in order to effectively produce
 Let's start by taking a look at the Socioeconomic data produced by the Utah Travel Study, conducted in 2012. This data summarizes information gathered from 10,000 randomly selected households in Utah. A small sampling is shown below:
 ```{r include = TRUE}
 sedata <- read.dbf("Data/SE_USTM_BASE2015.DBF")
-sedata[c(1200,3300,4500,5500,6000,7500,8000,8500),1:9]
+kable(sedata[c(1200,3300,4500,5500,6000,7500,8000,8500),1:9])
 ```
 Here, we can see the attributes associated with each of the households on record. Some of the geographic areas in Utah are associated with MPOs, as indicated in the SUBAREAID column. There are only 4 MPOs in Utah, so many households, such as those in Grand and Uintah counites, do not have TAZIDs associated with them. We will also look at a summary of this data set:
 ```{r sedata}
-summary(sedata)
+kable(summary(sedata))
 ```
 
 ### MC Constans and Coefficients
 Lets also take a look at the Mode Choice constants and coefficients:
 ```{r mcconst}
 mcconst <- read.csv("Data/MC_Constants.csv")
-mcconst
+kable(mcconst)
 ```
 
 ```{r mccoeff}
 mccoeff <- read.csv("Data/MC_Coefficients.csv")
-mccoeff
+kable(mccoeff)
 ```
 
 The Mode Choice Constants and Coefficients are used to help weight the inputs to correctly determine the Mode Choice Logsum output, that serves as the impedance term in the Destination Choice Logsum calculation. These inputs are taken from the Oregen Statewide Travel Model, and from the Roanokoke Valley Transportation Planning Organization. The Oregon model had well suited data for each of the five trip types except Home-based work trips, which is why we used the RVTPO data for HBW trip purposes. 
@@ -36,7 +36,7 @@ The Mode Choice Constants and Coefficients are used to help weight the inputs to
 ## Demonstration Model Framework
 
 Figure 1 shows a schematic of the model framework. 
-```{r image1}
+```{r image1. echo = FALSE}
 include_graphics(('images/model_framework.png'))
 ```
 
@@ -58,7 +58,7 @@ The outputs are then combined to create a single file with all of the destinatio
 We conducted a sensitivity analysis where we simulated a broken highway link in our demonstration model to verify that the model was responding in an appropriate way. Figure 4 shows the change in the log sum value for each purpose resulting from breaking a single highway link across all trip purposes. In order to simulate the changes caused by a broken link, a link was removed from the network file; the model then uses updated highway travel times to compute the mode and destination choice log sums. In general, the change in log sums shows a reasonable response, but the link selected is a major facility for travel in all directions through Roanoke. We are currently investigating whether these unexpected results are the result of improper specification, or whether they reveal a genuine nuance within this particular application technique. 
 
 
-```{r image2}
+```{r image2, echo = FALSE}
 include_graphics('images/absolute_error_choropleth')
 ```
 
