@@ -73,13 +73,25 @@ include_graphics('images/risky_links.png')
 ```
 
 ## Leaflet Visualization
+The following is a visualizaiton of the original DCLS values resulting from the broken link. This interactive map will display the home-based work attribute according to the TAZ that the mouse is currently hovering over. Ideally, this would be repeatable for each of the five trip purposes, 
 ```{r map, echo = FALSE}
 map <- st_read("Data/RoanokeTAZ.shp")    
 map <- st_transform(map, CRS("+proj=longlat +ellps=GRS80"))
+
+labels <- sprintf(
+  "<strong>%s</strong><br/>%g Destination Choice Logsum",
+  broken_rowsum$TAZ, broken_rowsum$LNHBW
+) %>% lapply(htmltools::HTML)
+
 m <- leaflet() %>% setView(lng = -79.9414, lat = 37.2710, zoom = 11) %>% addTiles() %>%
   addPolygons(data=map,weight=1,col = 'black',smoothFactor = 0.5,
     opacity = 1.0, fillOpacity = 1,fillColor = ~colorQuantile("Blues", broken_rowsum$LNHBW)(broken_rowsum$LNHBW),
     highlightOptions = highlightOptions(color = "orange", weight = 3,
-      bringToFront = TRUE))
+      bringToFront = TRUE),
+    label = labels,
+  labelOptions = labelOptions(
+    style = list("font-weight" = "normal", padding = "3px 8px"),
+    textsize = "15px",
+    direction = "auto"))
 m
 ```
