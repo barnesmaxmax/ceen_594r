@@ -1,6 +1,6 @@
 # CEEN 594r Data Analysis Project
 
-This project contains an introductory data analysis report for preliminary results from the Utah Statwide Model resiliency project, which seeks to detemrine the change in Destination Choice Logsums resulting from long term network disruption. 
+This project contains an introductory data analysis report for preliminary results from the Utah Statwide Model resiliency project, which seeks to detemrine the change in Destination Choice Logsums resulting from long term network disruption. A project website can be seen at: https://barnesmaxmax.github.io/ceen_594r/
 
 ## Repo Instructions
 Only a few data sets are needed to be able to run this repo. These data sets are included in the Data folder in the repo. Each of these data sets are either an in put or output from the CUBE model created for the USTM resiliency project. 
@@ -19,9 +19,9 @@ library("modelr")
 library("SimDesign")
 library("knitr")
 library("sp")
-library("readxl"")
-library("xtable"")
-library("pander"")
+library("readxl")
+library("xtable")
+library("pander")
 
-### Necessary files
+
 
