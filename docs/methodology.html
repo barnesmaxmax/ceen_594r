@@ -24,7 +24,7 @@
 <meta name="author" content="Max Barnes" />
 
 
-<meta name="date" content="2020-12-16" />
+<meta name="date" content="2020-12-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -159,10 +159,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="methodology.html"><a href="methodology.html#demonstration-model-framework"><i class="fa fa-check"></i><b>3.2</b> Demonstration Model Framework</a></li>
 <li class="chapter" data-level="3.3" data-path="methodology.html"><a href="methodology.html#simulating-a-broken-link-within-the-demonstration-model"><i class="fa fa-check"></i><b>3.3</b> Simulating a Broken Link Within the Demonstration Model</a></li>
 <li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#identifying-vulnerable-links"><i class="fa fa-check"></i><b>3.4</b> Identifying Vulnerable Links</a></li>
-<li class="chapter" data-level="3.5" data-path="methodology.html"><a href="methodology.html#leaflet-visualization"><i class="fa fa-check"></i><b>3.5</b> Leaflet Visualization</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="resiliency-visualizations.html"><a href="resiliency-visualizations.html"><i class="fa fa-check"></i><b>4</b> resiliency visualizations</a></li>
-<li class="chapter" data-level="5" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>5</b> References</a></li>
+<li class="chapter" data-level="4" data-path="resiliency-visualizations.html"><a href="resiliency-visualizations.html"><i class="fa fa-check"></i><b>4</b> resiliency visualizations</a><ul>
+<li class="chapter" data-level="4.1" data-path="resiliency-visualizations.html"><a href="resiliency-visualizations.html#leaflet-visualization"><i class="fa fa-check"></i><b>4.1</b> Leaflet Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="results-and-recommendations.html"><a href="results-and-recommendations.html"><i class="fa fa-check"></i><b>5</b> Results and Recommendations</a></li>
+<li class="chapter" data-level="6" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>6</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -191,8 +193,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="socioeconomic-data" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Socioeconomic Data</h3>
 <p>Let’s start by taking a look at the Socioeconomic data produced by the Utah Travel Study, conducted in 2012. This data summarizes information gathered from 10,000 randomly selected households in Utah. A small sampling is shown below:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="methodology.html#cb13-1"></a>sedata &lt;-<span class="st"> </span><span class="kw">read.dbf</span>(<span class="st">&quot;Data/SE_USTM_BASE2015.DBF&quot;</span>)</span>
-<span id="cb13-2"><a href="methodology.html#cb13-2"></a><span class="kw">kable</span>(sedata[<span class="kw">c</span>(<span class="dv">1200</span>,<span class="dv">3300</span>,<span class="dv">4500</span>,<span class="dv">5500</span>,<span class="dv">6000</span>,<span class="dv">7500</span>,<span class="dv">8000</span>,<span class="dv">8500</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="methodology.html#cb16-1"></a>sedata &lt;-<span class="st"> </span><span class="kw">read.dbf</span>(<span class="st">&quot;Data/SE_USTM_BASE2015.DBF&quot;</span>)</span>
+<span id="cb16-2"><a href="methodology.html#cb16-2"></a><span class="kw">kable</span>(sedata[<span class="kw">c</span>(<span class="dv">1200</span>,<span class="dv">3300</span>,<span class="dv">4500</span>,<span class="dv">5500</span>,<span class="dv">6000</span>,<span class="dv">7500</span>,<span class="dv">8000</span>,<span class="dv">8500</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>])</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -308,7 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Here, we can see the attributes associated with each of the households on record. Some of the geographic areas in Utah are associated with MPOs, as indicated in the SUBAREAID column. There are only 4 MPOs in Utah, so many households, such as those in Grand and Uintah counites, do not have TAZIDs associated with them. We will also look at a summary of this data set:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="methodology.html#cb14-1"></a><span class="kw">kable</span>(<span class="kw">summary</span>(sedata))</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="methodology.html#cb17-1"></a><span class="kw">kable</span>(<span class="kw">summary</span>(sedata))</span></code></pre></div>
 <table style="width:100%;">
 <colgroup>
 <col width="0%" />
@@ -652,8 +654,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="mc-constans-and-coefficients" class="section level3">
 <h3><span class="header-section-number">3.1.2</span> MC Constans and Coefficients</h3>
 <p>Lets also take a look at the Mode Choice constants and coefficients:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="methodology.html#cb15-1"></a>mcconst &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/MC_Constants.csv&quot;</span>)</span>
-<span id="cb15-2"><a href="methodology.html#cb15-2"></a><span class="kw">kable</span>(mcconst)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="methodology.html#cb18-1"></a>mcconst &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/MC_Constants.csv&quot;</span>)</span>
+<span id="cb18-2"><a href="methodology.html#cb18-2"></a><span class="kw">kable</span>(mcconst)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -759,8 +761,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="methodology.html#cb16-1"></a>mccoeff &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/MC_Coefficients.csv&quot;</span>)</span>
-<span id="cb16-2"><a href="methodology.html#cb16-2"></a><span class="kw">kable</span>(mccoeff)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="methodology.html#cb19-1"></a>mccoeff &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/MC_Coefficients.csv&quot;</span>)</span>
+<span id="cb19-2"><a href="methodology.html#cb19-2"></a><span class="kw">kable</span>(mccoeff)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -981,11 +983,6 @@ C. Attractions: Zonal trip attractions from the USTM model</p>
 <h2><span class="header-section-number">3.4</span> Identifying Vulnerable Links</h2>
 <p>It is necessary for us to identify links in the UTSM network whose breaks we could simulate in our analysis. The AEM (2017) study inspiring this current work identified nine physical threat categories and locations of elevated risk to highway facilities on the I-15 corridor; the present analysis requires that we identify highway links at risk anywhere in Utah, and thus cannot rely only on the identification completed by AEM. An alternative method to identifying links vulnerable to specific risks would be to simply make arbitrary cuts in the network at locations the TAC identifies that could be representative of unknown threats or suspected choke points in the USTM network. The Risk Priority Analysis completed by BIO-WEST (2020) shows Composite Threat Probability by Road Segment. We used this analysis to identify 40 locations in the UTSM network that are either posed with an elevated annual threat or identified as a choke point. We also desired to have a mix of urban and rural facilities to demonstrate the potential flexibility of our proposed technique.</p>
 <p><img src="images/risky_links.png" width="316" /></p>
-</div>
-<div id="leaflet-visualization" class="section level2">
-<h2><span class="header-section-number">3.5</span> Leaflet Visualization</h2>
-<div id="htmlwidget-5aab25643c02bbcedb4b" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5aab25643c02bbcedb4b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-79.9357,37.281,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Roanoke, VA",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-79.9357,-79.9357],"lng":[37.281,37.281]}},"evals":[],"jsHooks":[]}</script>
 
 </div>
 </div>
