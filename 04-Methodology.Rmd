@@ -72,27 +72,4 @@ It is necessary for us to identify links in the UTSM network whose breaks we cou
 include_graphics('images/risky_links.png')
 ```
 
-## Leaflet Visualization
-The following is a visualization of the original DCLS values resulting from the broken link. This interactive map will display the home-based work attribute according to the TAZ that the mouse is currently hovering over. Ideally, the choropleth would change based on a desired trip purpose, however achieving this functionality was not possible at this time. Displaying each of the values for each TAZ was possible, but this was not implemented to avoid confusion with the displayed coloring based on only one of the data sets. It is worth noting, however, that an attempt was made to achieve this functionality and to be able to display a legend that adopted the desired color scheme, however this was also abandoned due to time constraints toward the end of the submission deadline. 
 
-```{r map, echo = FALSE}
-map <- st_read("Data/RoanokeTAZ.shp")    
-map <- st_transform(map, CRS("+proj=longlat +ellps=GRS80"))
-
-labels <- sprintf(
-  "<strong>%s</strong><br/>%g Destination Choice Logsum",
-  broken_rowsum$TAZ, broken_rowsum$LNHBW
-) %>% lapply(htmltools::HTML)
-
-m <- leaflet() %>% setView(lng = -79.9414, lat = 37.2710, zoom = 11) %>% addTiles() %>%
-  addPolygons(data=map,weight=1,col = 'black',smoothFactor = 0.5,
-    opacity = 1.0, fillOpacity = 1,fillColor = ~colorQuantile("Blues", broken_rowsum$LNHBW)(broken_rowsum$LNHBW),
-    highlightOptions = highlightOptions(color = "orange", weight = 3,
-      bringToFront = TRUE),
-    label = labels,
-  labelOptions = labelOptions(
-    style = list("font-weight" = "normal", padding = "3px 8px"),
-    textsize = "15px",
-    direction = "auto"))
-m
-```

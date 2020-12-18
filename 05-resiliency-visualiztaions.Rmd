@@ -8,6 +8,7 @@ library("foreign")
 library("maptools")
 library("modelr")
 library("SimDesign")
+library("knitr")
 ```
 # resiliency visualizations
 
@@ -167,17 +168,43 @@ Now that we have reviewed all the different ways to measure the differences betw
 
 ```{r overall comparison}
 ## Total RMSE between full model and difference comparison
-RMSE(change_broken1, parameter = whole_rowsum, type = "RMSE")
+kable(RMSE(change_broken1, parameter = whole_rowsum, type = "RMSE"))
 ## Total RMSE between full model and absolute error comparison
-RMSE(change_broken2, parameter = whole_rowsum, type = "RMSE")
+kable(RMSE(change_broken2, parameter = whole_rowsum, type = "RMSE"))
 ## Total RMSE between full model and RMSE comparison
-RMSE(change_broken3, parameter = whole_rowsum, type = "RMSE")
+kable(RMSE(change_broken3, parameter = whole_rowsum, type = "RMSE"))
 ## Total RMSE between full model and mean absolute error comparison
-RMSE(change_broken4, parameter = whole_rowsum, type = "RMSE")
+kable(RMSE(change_broken4, parameter = whole_rowsum, type = "RMSE"))
 ## Total RMSE between full model and mean absolute percentage comparison
-RMSE(change_broken5, parameter = whole_rowsum, type = "RMSE")
+kable(RMSE(change_broken5, parameter = whole_rowsum, type = "RMSE"))
 ```
 
 From the RMSE calculation results, we can see that each of the previous methods used to determine differences between the orignal data and the altered data vary slightly. For example, in the LNHBC term, the RMSE values differ slightly, ranging from 64.11984 to 64.12083, with absolute error returning a smaller value than each of the other methods, and the simple difference comparison returning a larger value. Interestingly, for LNHBC, the MAE and MAPE are identical at 64.12033. Similar trends follow for LNHBO, LNHB, and LNREC. LNHBW has a smallest overall RMSE value when absolute error is  used, and a largest overall RMSE value when MAPE is used. The values for LNHBW range from 62.6392 to 62.72442. LNNHB similarly reports a lowest overall RMSE value when absolute error is used, however, the reported largest overall RMSE value is the same for MAE and MAPE, with a range from 63.06703 to 63.06791.
 
 LNHBC has an overall RMSE range of `r 64.12083 - 64.11984`, LNHBO has a range of just `r 64.47364 - 64.47250`, LNHBW a range of `r 62.72442 - 62.63952`, LNNHB a range of `r 63.06791 - 63.06703`, and LNREC a range of `r 63.41272 - 63.41139`. The trip purpose with the smallest overall RMSE range is LNHBC, while LNHBW has the highest RMSE range with 0.0849. THis indicates that LNHBW is the tirp purpose most negatively effected by the link break done for this analysis, as reported previously. LNHBC was the trip purpsoe with the highest level of resilience for this particular scenario. 
+
+
+## Leaflet Visualization
+The following is a visualization of the original DCLS values resulting from the broken link. This interactive map will display the home-based work attribute according to the TAZ that the mouse is currently hovering over. Ideally, the choropleth would change based on a desired trip purpose, however achieving this functionality was not possible at this time. Displaying each of the values for each TAZ was possible, but this was not implemented to avoid confusion with the displayed coloring based on only one of the data sets. It is worth noting, however, that an attempt was made to achieve this functionality and to be able to display a legend that adopted the desired color scheme, however this was also abandoned due to time constraints toward the end of the submission deadline. 
+
+```{r map, echo = FALSE, message = FALSE}
+map <- st_read("Data/RoanokeTAZ.shp")    
+map <- st_transform(map, CRS("+proj=longlat +ellps=GRS80"))
+
+labels <- sprintf(
+  "<strong>%s</strong><br/>%g Destination Choice Logsum",
+  broken_rowsum$TAZ, broken_rowsum$LNHBW
+) %>% lapply(htmltools::HTML)
+
+m <- leaflet() %>% setView(lng = -79.9414, lat = 37.2710, zoom = 11) %>% addTiles() %>%
+  addPolygons(data=map,weight=1,col = 'black',smoothFactor = 0.5,
+    opacity = 1.0, fillOpacity = 1,fillColor = ~colorQuantile("Blues", broken_rowsum$LNHBW)(broken_rowsum$LNHBW),
+    highlightOptions = highlightOptions(color = "orange", weight = 3,
+      bringToFront = TRUE),
+    label = labels,
+  labelOptions = labelOptions(
+    style = list("font-weight" = "normal", padding = "3px 8px"),
+    textsize = "15px",
+    direction = "auto"))
+m
+```
