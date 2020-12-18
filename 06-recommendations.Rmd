@@ -1,0 +1,8 @@
+## Results and Recommendations
+
+Using data provided by the Utah Department of Transportation, a transportaiton model using CUBE has been built to generate the Destination Choice Logsum (DCLS) for the highway network in Utah. Using this data, we are able to understand the changes in travel due to disruptions to the network. If a link in the network were to deteriorate and become suddenly unavailable, this project can help UDOT officials to understand the impacts of that event. 
+
+By experimentally cutting links and viewing the resulting differences in DCLS between the broken and unbroken networks, the ramifications of the loss of various links can be investigated. This data analysis has provided a way to better understand the differences between different types of error calculations and how they represent the changes in DCLS between the original and altered networks. The analysis has shown that there is variation between how each method of error measurement, however that 
+
+Next steps for a more complete analysis include a systematic breakdown of the Mode choice logsum and destination choice logsum utilty equations, taking into account what variables are present for each. Additionally, an examination of the equations used to calculat the MC and DC logsums may be in order, simply to verify that they are correct, and that no mistakes have been made. 
+
