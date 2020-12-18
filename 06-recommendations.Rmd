@@ -1,4 +1,4 @@
-## Results and Recommendations
+# Results and Recommendations
 
 Using data provided by the Utah Department of Transportation, a transportaiton model using CUBE has been built to generate the Destination Choice Logsum (DCLS) for the highway network in Utah. Using this data, we are able to understand the changes in travel due to disruptions to the network. If a link in the network were to deteriorate and become suddenly unavailable, this project can help UDOT officials to understand the impacts of that event. 
 
