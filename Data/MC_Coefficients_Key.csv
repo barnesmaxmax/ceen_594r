@@ -1,0 +1,19 @@
+﻿Variable Description
+Coefficient of in-vehicle travel time
+Coefficient of short wait time (< 5 mins)
+Coefficient of long wait time (<= 5 mins)
+Coefficient of transfer wait time
+Coefficient of travel cost (ex: auto operating cost or transit fare)
+Coefficient of terminal time (out of vehicle time)
+Coefficient on walk access time to transit
+Coefficient on short walk distance (set by DwalkBike)
+Coefficient on slong walk distance (set by DwalkBike)
+Coefficient on short bike distance (set by DwalkBike)
+Coefficient on long bike distance (set by DwalkBike)
+Short and Long Walk / Bike threshold
+Mode Choice Nesting Coefficient Level1
+Mode Choice Nesting Coefficient Level2
+Boolean: CBD MC calibration constant
+Coefficient on Number of transfers
+Auto operating cost (cents/mile)
+Share ride auto occupancy factor

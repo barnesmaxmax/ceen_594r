@@ -13,38 +13,60 @@ The USTM Resiliency project uses many input data in order to effectively produce
 
 ### Socioeconomic Data
 Let's start by taking a look at the Socioeconomic data produced by the Utah Travel Study, conducted in 2012. This data summarizes information gathered from 10,000 randomly selected households in Utah. A small sampling is shown below:
-```{r include = TRUE}
+```{r sedata, echo = FALSE}
 sedata <- read.dbf("Data/SE_USTM_BASE2015.DBF")
-kable(sedata[c(1200,3300,4500,5500,6000,7500,8000,8500),1:9])
+kable(sedata[c(1200,3300,4500,5500,6000,7500,8000,8500),1:9],
+      caption = "Random representation of available Socioeconomic Data")
 ```
-Here, we can see the attributes associated with each of the households on record. Some of the geographic areas in Utah are associated with MPOs, as indicated in the SUBAREAID column. There are only 4 MPOs in Utah, so many households, such as those in Grand and Uintah counites, do not have TAZIDs associated with them. We will also look at a summary of this data set:
-```{r sedata}
-kable(summary(sedata))
+In \@ref(tab:sedata) we can see the attributes associated with each of the households on record. Some of the geographic areas in Utah are associated with MPOs, as indicated in the SUBAREAID column. There are only 4 MPOs in Utah, so many households, such as those in Grand and Uintah counites, do not have TAZIDs associated with them. We will also look at a summary of this data set in \@ref(tab:sesum).
+```{r sesum, echo = FALSE}
+kable(summary(sedata),
+      caption = "Summary of Socioeconomic Data")
 ```
 
-### MC Constans and Coefficients
-Lets also take a look at the Mode Choice constants and coefficients:
-```{r mcconst}
+### MC Constants and Coefficients
+Lets also take a look at the Mode Choice Constants seen in Table \@ref(tab:mcconst) and the Mode Choice Coefficients in Table \@ref(tab:mccoeff) which are used to help weight the model inputs to correctly determine the Mode Choice Logsum, one of the outputs needed to correctly determine the Destination Choice Logsum. The Mode Choice Logsum eventually serves as the impedance term in the Destination Choice Logsum calculation, which is one of the reasons why it must be calculated. The Utah Statewide Model currently does not have the capability for destination choice modeling. To mitigate this, mode choice coefficients were adopted from both the Oregon Statewide Travel Model, and from the Roanoke Valley Transportation Planning Organization (RVTPO). The Oregon model had well suited data for each of the five trip types except Home-based Work trips, which led us to adopt coefficients from the RVTPO model for Home-based work trips. Calculating model coefficients is a lengthy and often expensive process. Thus, the needed coefficients were adopted from currently existing destination choice models. The acronyms used to describe the different trip types in the USTM model are as follows: HBW for Home-based work, HBO for Home-based other, NHB for Non-home based, HBC for Home-based college, and REC for Recreation related trips. 
+
+```{r mcconst, echo = FALSE}
 mcconst <- read.csv("Data/MC_Constants.csv")
-kable(mcconst)
+kable(mcconst[1:4,],
+      caption = "Mode Choice Constants")
 ```
 
-```{r mccoeff}
+In Figure \@ref(fig:mcconst), K_SR indicates the constant for a shared ride for each of the trip purposes. Similarly, K_TRN indicates the constant for transit, K_NMOT indicates the constant for non-motorized, and K_PREM indicates the constant for premium (paid) services. Non-motorized transportation typically consists of individuals who either walk or bike to their destinations. Premium services consist of tranport options such as taxi, express busses (like the St. George Shuttle), or ride-sharing services such as UBER and Lyft.
+
+```{r mccoeff, echo = FALSE}
 mccoeff <- read.csv("Data/MC_Coefficients.csv")
-kable(mccoeff)
+kable(mccoeff,
+      caption = "Mode Choice Coefficients")
 ```
 
-The Mode Choice Constants and Coefficients are used to help weight the inputs to correctly determine the Mode Choice Logsum output, that serves as the impedance term in the Destination Choice Logsum calculation. These inputs are taken from the Oregen Statewide Travel Model, and from the Roanokoke Valley Transportation Planning Organization. The Oregon model had well suited data for each of the five trip types except Home-based work trips, which is why we used the RVTPO data for HBW trip purposes. 
+Due to the fact that the Home-based Work (HBW) Mode Choice coefficients were adopted from a different model than the other coefficients, the values need to be examined to ensure that they are appropriate to be used alongside the coefficients from the Oregon Statewide Travel Model. A key to the coefficients included can be seen in  \@ref(fig:mccoeffkey) below.
+
+```{r mccoeffkey, echo = FALSE}
+mccoeffkey <- read.csv("Data/MC_Coefficients_Key.csv")
+kable(mccoeffkey,
+      caption = "Mode Choice Coefficients Key")
+```
+
+The coefficient for in-vehicle travel time is slightly smaller for HBW than for the other other trip purposes. 
+
+ADD JUSIFICATION FOR ALL OF THE OTHER COEFFICIENTS HERE
+
+It is necessary to understand these variables and the purpose they serve, before examining the MC Utility Equations in the next section.
+
+## Mode Choice Utility Equations
 
 ## Demonstration Model Framework
 
-Figure 1 shows a schematic of the model framework. 
-```{r image1, echo = FALSE}
+Figure \@ref(fig:modelfrmwrk) shows a schematic of the model framework as originally proposed. This framework closely matches that of existing destination choice models.
+
+```{r modelfrmwrk, echo = FALSE}
 include_graphics(('images/model_framework.png'))
 ```
 
 
-The framework has three main inputs:	
+The framework has three main inputs:
 A. Highway Network: The USTM model network was obtained from UDOT and forms the basis of the model.
 B. Productions: Zonal trip productions from the USTM model  
 C. Attractions: Zonal trip attractions from the USTM model
