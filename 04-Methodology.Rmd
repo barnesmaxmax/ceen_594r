@@ -57,6 +57,17 @@ It is necessary to understand these variables and the purpose they serve, before
 
 ## Mode Choice Utility Equations
 
+This section aims to analyze and explain the variables and terms included in the Mode Choice (MC) Utility Equation for each trip purpose. There will be some commonalities between each of the trip purposes, which will be noted in the explanation. The inputs in this section of the model are identical for each trip purpose. The inputs include a script file, which contains code specific to each trip purpose being examined, a processed skims matrix, the Peak-hour Transit skims (considered a constant in this model), and the Mode Choice Coefficients and Constants (as seen in \@ref(fig:mccoeff) and \@ref(fig:mcconst). The script file used to process the inputs controls which information is used to analyze each, thus allowing the same data inputs to be used for each trip purpose while only using the specific information pertaining to that trip purpose. The drive alone, non-motorized, and transit utilities are calculated for each trip purpose. The script files will be examined more closely in the following sections. Several output files are also prodiced for each fo the trip purposes. These include a print file, and matrix files that display the calculated probability and utility used in the logsum equation, as well as the calculated logsum values. 
+
+### Home-based Work Mode Choice Utility Equation
+The drive alone utility equation uses the coefficient of in-vehicle travel time, cost coefficient, and the autocost, along with the calculated travel time and distance between two zones. The equation appears as follows:
+$$\begin{split} \text{ HBW_DRIVE_ALONE } = (\text{COEFF_IVTT * TIME)}\\ + (\text{COEFF_COST} * AUTOCOST * DISTANCE)\end{split}$$
+The equation for HBW Non-motorized trips is:
+$$\begin{split} \text{HBW_NMOT} = (\text{K_NMOT * COEFF_WALK1 * 20 * DISTANCE < 1 MILE)}\\+ (\text{COEFF_WALK2 * 20 * DISTANCE > 1 MILE})\end{split}$$
+
+Similarly, the equation for HBW transit utility is as follows:
+$$\begin{split}\text{HBW_TRANSIT} = (\text{K_TRN * WALK_BUS_TIME)}\\ + (\text{COEFF_COST} * AUTOCOST * DISTANCE)\end{split}$$
+
 ## Demonstration Model Framework
 
 Figure \@ref(fig:modelfrmwrk) shows a schematic of the model framework as originally proposed. This framework closely matches that of existing destination choice models.
