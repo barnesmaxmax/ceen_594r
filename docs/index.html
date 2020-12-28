@@ -24,7 +24,7 @@
 <meta name="author" content="Max Barnes" />
 
 
-<meta name="date" content="2020-12-17" />
+<meta name="date" content="2020-12-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -154,11 +154,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="methodology.html"><a href="methodology.html"><i class="fa fa-check"></i><b>3</b> Methodology</a><ul>
 <li class="chapter" data-level="3.1" data-path="methodology.html"><a href="methodology.html#input-data"><i class="fa fa-check"></i><b>3.1</b> Input Data</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="methodology.html"><a href="methodology.html#socioeconomic-data"><i class="fa fa-check"></i><b>3.1.1</b> Socioeconomic Data</a></li>
-<li class="chapter" data-level="3.1.2" data-path="methodology.html"><a href="methodology.html#mc-constans-and-coefficients"><i class="fa fa-check"></i><b>3.1.2</b> MC Constans and Coefficients</a></li>
+<li class="chapter" data-level="3.1.2" data-path="methodology.html"><a href="methodology.html#mc-constants-and-coefficients"><i class="fa fa-check"></i><b>3.1.2</b> MC Constants and Coefficients</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="methodology.html"><a href="methodology.html#demonstration-model-framework"><i class="fa fa-check"></i><b>3.2</b> Demonstration Model Framework</a></li>
-<li class="chapter" data-level="3.3" data-path="methodology.html"><a href="methodology.html#simulating-a-broken-link-within-the-demonstration-model"><i class="fa fa-check"></i><b>3.3</b> Simulating a Broken Link Within the Demonstration Model</a></li>
-<li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#identifying-vulnerable-links"><i class="fa fa-check"></i><b>3.4</b> Identifying Vulnerable Links</a></li>
+<li class="chapter" data-level="3.2" data-path="methodology.html"><a href="methodology.html#mode-choice-utility-equations"><i class="fa fa-check"></i><b>3.2</b> Mode Choice Utility Equations</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="methodology.html"><a href="methodology.html#home-based-work-mode-choice-utility-equation"><i class="fa fa-check"></i><b>3.2.1</b> Home-based Work Mode Choice Utility Equation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="methodology.html"><a href="methodology.html#demonstration-model-framework"><i class="fa fa-check"></i><b>3.3</b> Demonstration Model Framework</a></li>
+<li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#simulating-a-broken-link-within-the-demonstration-model"><i class="fa fa-check"></i><b>3.4</b> Simulating a Broken Link Within the Demonstration Model</a></li>
+<li class="chapter" data-level="3.5" data-path="methodology.html"><a href="methodology.html#identifying-vulnerable-links"><i class="fa fa-check"></i><b>3.5</b> Identifying Vulnerable Links</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="resiliency-visualizations.html"><a href="resiliency-visualizations.html"><i class="fa fa-check"></i><b>4</b> resiliency visualizations</a><ul>
 <li class="chapter" data-level="4.1" data-path="resiliency-visualizations.html"><a href="resiliency-visualizations.html#leaflet-visualization"><i class="fa fa-check"></i><b>4.1</b> Leaflet Visualization</a></li>
@@ -188,14 +191,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Resiliency in Transportation Systems</h1>
 <p class="author"><em>Max Barnes</em></p>
-<p class="date"><em>2020-12-17</em></p>
+<p class="date"><em>2020-12-28</em></p>
 </div>
 <div id="ProjectQuestion" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Project Question</h1>
 <p>UDOT maintains a vast network of highways within the State of Utah. Many hazards (both manmade and naturally occurring) exist that threaten the integrity of these systems. Much is already known about the effects disasters can have on transportation systems, such as changes in route choice, travel time, and transit ridership. Recent disasters, such as the Minneapolis Bridge Collapse and the Atlanta Bridge Fire, have given researchers the opportunity to better evaluate these changes in recent years. Researchers employed numerous methods to analyze and understand the regional impacts of these events. However, one tool that is not well represented in current research is traffic forecasting and planning software. Programs such as Citilabs’ CUBE possess unique capabilies to analyze more types of data all at once through logit modeling, rather than separately as has been done in existing research. This project seeks to determine if logit modeling can better predict the impacts of adverse effects on transportation systems by using socioeconomic data gathered during the 2010 US Census to forecast changes in destination choice. It is hypothesized that by comparing changes in forecasted travel between transportation analysis zones (TAZs), a better prediction of the changes to driver behavior, and thus destination choice, can be made.</p>
 
 <pre><code>## Warning: package &#39;xtable&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ── Attaching packages ────────────────────────────── tidyverse 1.3.0 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
 ## ✓ tibble  3.0.3     ✓ dplyr   1.0.1
 ## ✓ tidyr   1.1.1     ✓ stringr 1.4.0
@@ -204,7 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Warning: package &#39;tibble&#39; was built under R version 4.0.2</code></pre>
 <pre><code>## Warning: package &#39;tidyr&#39; was built under R version 4.0.2</code></pre>
 <pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ───────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <pre><code>## Warning: package &#39;pander&#39; was built under R version 4.0.2</code></pre>

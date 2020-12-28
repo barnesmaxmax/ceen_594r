@@ -24,7 +24,7 @@
 <meta name="author" content="Max Barnes" />
 
 
-<meta name="date" content="2020-12-17" />
+<meta name="date" content="2020-12-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -154,11 +154,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="methodology.html"><a href="methodology.html"><i class="fa fa-check"></i><b>3</b> Methodology</a><ul>
 <li class="chapter" data-level="3.1" data-path="methodology.html"><a href="methodology.html#input-data"><i class="fa fa-check"></i><b>3.1</b> Input Data</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="methodology.html"><a href="methodology.html#socioeconomic-data"><i class="fa fa-check"></i><b>3.1.1</b> Socioeconomic Data</a></li>
-<li class="chapter" data-level="3.1.2" data-path="methodology.html"><a href="methodology.html#mc-constans-and-coefficients"><i class="fa fa-check"></i><b>3.1.2</b> MC Constans and Coefficients</a></li>
+<li class="chapter" data-level="3.1.2" data-path="methodology.html"><a href="methodology.html#mc-constants-and-coefficients"><i class="fa fa-check"></i><b>3.1.2</b> MC Constants and Coefficients</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="methodology.html"><a href="methodology.html#demonstration-model-framework"><i class="fa fa-check"></i><b>3.2</b> Demonstration Model Framework</a></li>
-<li class="chapter" data-level="3.3" data-path="methodology.html"><a href="methodology.html#simulating-a-broken-link-within-the-demonstration-model"><i class="fa fa-check"></i><b>3.3</b> Simulating a Broken Link Within the Demonstration Model</a></li>
-<li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#identifying-vulnerable-links"><i class="fa fa-check"></i><b>3.4</b> Identifying Vulnerable Links</a></li>
+<li class="chapter" data-level="3.2" data-path="methodology.html"><a href="methodology.html#mode-choice-utility-equations"><i class="fa fa-check"></i><b>3.2</b> Mode Choice Utility Equations</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="methodology.html"><a href="methodology.html#home-based-work-mode-choice-utility-equation"><i class="fa fa-check"></i><b>3.2.1</b> Home-based Work Mode Choice Utility Equation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="methodology.html"><a href="methodology.html#demonstration-model-framework"><i class="fa fa-check"></i><b>3.3</b> Demonstration Model Framework</a></li>
+<li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#simulating-a-broken-link-within-the-demonstration-model"><i class="fa fa-check"></i><b>3.4</b> Simulating a Broken Link Within the Demonstration Model</a></li>
+<li class="chapter" data-level="3.5" data-path="methodology.html"><a href="methodology.html#identifying-vulnerable-links"><i class="fa fa-check"></i><b>3.5</b> Identifying Vulnerable Links</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="resiliency-visualizations.html"><a href="resiliency-visualizations.html"><i class="fa fa-check"></i><b>4</b> resiliency visualizations</a><ul>
 <li class="chapter" data-level="4.1" data-path="resiliency-visualizations.html"><a href="resiliency-visualizations.html#leaflet-visualization"><i class="fa fa-check"></i><b>4.1</b> Leaflet Visualization</a></li>
@@ -193,9 +196,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="socioeconomic-data" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Socioeconomic Data</h3>
 <p>Let’s start by taking a look at the Socioeconomic data produced by the Utah Travel Study, conducted in 2012. This data summarizes information gathered from 10,000 randomly selected households in Utah. A small sampling is shown below:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="methodology.html#cb16-1"></a>sedata &lt;-<span class="st"> </span><span class="kw">read.dbf</span>(<span class="st">&quot;Data/SE_USTM_BASE2015.DBF&quot;</span>)</span>
-<span id="cb16-2"><a href="methodology.html#cb16-2"></a><span class="kw">kable</span>(sedata[<span class="kw">c</span>(<span class="dv">1200</span>,<span class="dv">3300</span>,<span class="dv">4500</span>,<span class="dv">5500</span>,<span class="dv">6000</span>,<span class="dv">7500</span>,<span class="dv">8000</span>,<span class="dv">8500</span>),<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>])</span></code></pre></div>
 <table>
+<caption><span id="tab:sedata">Table 3.1: </span>Random representation of available Socioeconomic Data</caption>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -309,9 +311,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>Here, we can see the attributes associated with each of the households on record. Some of the geographic areas in Utah are associated with MPOs, as indicated in the SUBAREAID column. There are only 4 MPOs in Utah, so many households, such as those in Grand and Uintah counites, do not have TAZIDs associated with them. We will also look at a summary of this data set:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="methodology.html#cb17-1"></a><span class="kw">kable</span>(<span class="kw">summary</span>(sedata))</span></code></pre></div>
+<p>In <a href="methodology.html#tab:sedata">3.1</a> we can see the attributes associated with each of the households on record. Some of the geographic areas in Utah are associated with MPOs, as indicated in the SUBAREAID column. There are only 4 MPOs in Utah, so many households, such as those in Grand and Uintah counites, do not have TAZIDs associated with them. We will also look at a summary of this data set in <a href="methodology.html#tab:sesum">3.2</a>.</p>
 <table style="width:100%;">
+<caption><span id="tab:sesum">Table 3.2: </span>Summary of Socioeconomic Data</caption>
 <colgroup>
 <col width="0%" />
 <col width="2%" />
@@ -651,12 +653,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </div>
-<div id="mc-constans-and-coefficients" class="section level3">
-<h3><span class="header-section-number">3.1.2</span> MC Constans and Coefficients</h3>
-<p>Lets also take a look at the Mode Choice constants and coefficients:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="methodology.html#cb18-1"></a>mcconst &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/MC_Constants.csv&quot;</span>)</span>
-<span id="cb18-2"><a href="methodology.html#cb18-2"></a><span class="kw">kable</span>(mcconst)</span></code></pre></div>
+<div id="mc-constants-and-coefficients" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> MC Constants and Coefficients</h3>
+<p>Lets also take a look at the Mode Choice Constants seen in Table <a href="methodology.html#tab:mcconst">3.3</a> and the Mode Choice Coefficients in Table <a href="methodology.html#tab:mccoeff">3.4</a> which are used to help weight the model inputs to correctly determine the Mode Choice Logsum, one of the outputs needed to correctly determine the Destination Choice Logsum. The Mode Choice Logsum eventually serves as the impedance term in the Destination Choice Logsum calculation, which is one of the reasons why it must be calculated. The Utah Statewide Model currently does not have the capability for destination choice modeling. To mitigate this, mode choice coefficients were adopted from both the Oregon Statewide Travel Model, and from the Roanoke Valley Transportation Planning Organization (RVTPO). The Oregon model had well suited data for each of the five trip types except Home-based Work trips, which led us to adopt coefficients from the RVTPO model for Home-based work trips. Calculating model coefficients is a lengthy and often expensive process. Thus, the needed coefficients were adopted from currently existing destination choice models. The acronyms used to describe the different trip types in the USTM model are as follows: HBW for Home-based work, HBO for Home-based other, NHB for Non-home based, HBC for Home-based college, and REC for Recreation related trips.</p>
 <table>
+<caption><span id="tab:mcconst">Table 3.3: </span>Mode Choice Constants</caption>
 <thead>
 <tr class="header">
 <th align="right">X.N</th>
@@ -705,65 +706,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">0.0000</td>
 <td align="right">0</td>
 </tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="left"></td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="right">6</td>
-<td align="left"></td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="right">7</td>
-<td align="left"></td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="right">8</td>
-<td align="left"></td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="right">9</td>
-<td align="left"></td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="right">10</td>
-<td align="left"></td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0.0000</td>
-<td align="right">0</td>
-</tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="methodology.html#cb19-1"></a>mccoeff &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/MC_Coefficients.csv&quot;</span>)</span>
-<span id="cb19-2"><a href="methodology.html#cb19-2"></a><span class="kw">kable</span>(mccoeff)</span></code></pre></div>
+<p>In Figure <a href="#fig:mcconst"><strong>??</strong></a>, K_SR indicates the constant for a shared ride for each of the trip purposes. Similarly, K_TRN indicates the constant for transit, K_NMOT indicates the constant for non-motorized, and K_PREM indicates the constant for premium (paid) services. Non-motorized transportation typically consists of individuals who either walk or bike to their destinations. Premium services consist of tranport options such as taxi, express busses (like the St. George Shuttle), or ride-sharing services such as UBER and Lyft.</p>
 <table>
+<caption><span id="tab:mccoeff">Table 3.4: </span>Mode Choice Coefficients</caption>
 <thead>
 <tr class="header">
 <th align="right">X.N</th>
@@ -958,14 +905,94 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>The Mode Choice Constants and Coefficients are used to help weight the inputs to correctly determine the Mode Choice Logsum output, that serves as the impedance term in the Destination Choice Logsum calculation. These inputs are taken from the Oregen Statewide Travel Model, and from the Roanokoke Valley Transportation Planning Organization. The Oregon model had well suited data for each of the five trip types except Home-based work trips, which is why we used the RVTPO data for HBW trip purposes.</p>
+<p>Due to the fact that the Home-based Work (HBW) Mode Choice coefficients were adopted from a different model than the other coefficients, the values need to be examined to ensure that they are appropriate to be used alongside the coefficients from the Oregon Statewide Travel Model. A key to the coefficients included can be seen in <a href="#fig:mccoeffkey"><strong>??</strong></a> below.</p>
+<table>
+<caption><span id="tab:mccoeffkey">Table 3.5: </span>Mode Choice Coefficients Key</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable.Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Coefficient of in-vehicle travel time</td>
+</tr>
+<tr class="even">
+<td align="left">Coefficient of short wait time (&lt; 5 mins)</td>
+</tr>
+<tr class="odd">
+<td align="left">Coefficient of long wait time (&lt;= 5 mins)</td>
+</tr>
+<tr class="even">
+<td align="left">Coefficient of transfer wait time</td>
+</tr>
+<tr class="odd">
+<td align="left">Coefficient of travel cost (ex: auto operating cost or transit fare)</td>
+</tr>
+<tr class="even">
+<td align="left">Coefficient of terminal time (out of vehicle time)</td>
+</tr>
+<tr class="odd">
+<td align="left">Coefficient on walk access time to transit</td>
+</tr>
+<tr class="even">
+<td align="left">Coefficient on short walk distance (set by DwalkBike)</td>
+</tr>
+<tr class="odd">
+<td align="left">Coefficient on slong walk distance (set by DwalkBike)</td>
+</tr>
+<tr class="even">
+<td align="left">Coefficient on short bike distance (set by DwalkBike)</td>
+</tr>
+<tr class="odd">
+<td align="left">Coefficient on long bike distance (set by DwalkBike)</td>
+</tr>
+<tr class="even">
+<td align="left">Short and Long Walk / Bike threshold</td>
+</tr>
+<tr class="odd">
+<td align="left">Mode Choice Nesting Coefficient Level1</td>
+</tr>
+<tr class="even">
+<td align="left">Mode Choice Nesting Coefficient Level2</td>
+</tr>
+<tr class="odd">
+<td align="left">Boolean: CBD MC calibration constant</td>
+</tr>
+<tr class="even">
+<td align="left">Coefficient on Number of transfers</td>
+</tr>
+<tr class="odd">
+<td align="left">Auto operating cost (cents/mile)</td>
+</tr>
+<tr class="even">
+<td align="left">Share ride auto occupancy factor</td>
+</tr>
+</tbody>
+</table>
+<p>The coefficient for in-vehicle travel time is slightly smaller for HBW than for the other other trip purposes.</p>
+<p>ADD JUSIFICATION FOR ALL OF THE OTHER COEFFICIENTS HERE</p>
+<p>It is necessary to understand these variables and the purpose they serve, before examining the MC Utility Equations in the next section.</p>
+</div>
+</div>
+<div id="mode-choice-utility-equations" class="section level2">
+<h2><span class="header-section-number">3.2</span> Mode Choice Utility Equations</h2>
+<p>This section aims to analyze and explain the variables and terms included in the Mode Choice (MC) Utility Equation for each trip purpose. There will be some commonalities between each of the trip purposes, which will be noted in the explanation. The inputs in this section of the model are identical for each trip purpose. The inputs include a script file, which contains code specific to each trip purpose being examined, a processed skims matrix, the Peak-hour Transit skims (considered a constant in this model), and the Mode Choice Coefficients and Constants (as seen in <a href="#fig:mccoeff"><strong>??</strong></a> and <a href="#fig:mcconst"><strong>??</strong></a>. The script file used to process the inputs controls which information is used to analyze each, thus allowing the same data inputs to be used for each trip purpose while only using the specific information pertaining to that trip purpose. The drive alone, non-motorized, and transit utilities are calculated for each trip purpose. The script files will be examined more closely in the following sections. Several output files are also prodiced for each fo the trip purposes. These include a print file, and matrix files that display the calculated probability and utility used in the logsum equation, as well as the calculated logsum values.</p>
+<div id="home-based-work-mode-choice-utility-equation" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Home-based Work Mode Choice Utility Equation</h3>
+<p>The drive alone utility equation uses the coefficient of in-vehicle travel time, cost coefficient, and the autocost, along with the calculated travel time and distance between two zones. The equation appears as follows:
+<span class="math display">\[\begin{split} \text{ HBW_DRIVE_ALONE } = (\text{COEFF_IVTT * TIME)}\\ + (\text{COEFF_COST} * AUTOCOST * DISTANCE)\end{split}\]</span>
+The equation for HBW Non-motorized trips is:
+<span class="math display">\[\begin{split} \text{HBW_NON_MOT} = (\text{K_NMOT * COEFF_WALK1 * 20 * DISTANCE &lt; 1 MILE)}\\+ (\text{COEFF_WALK2 * 20 * DISTANCE &gt; 1 MILE})\end{split}\]</span></p>
+<p>Similarly, the equation for HBW transit utility is as follows:
+<span class="math display">\[\begin{split}\text{HBW_TRANSIT} = (\text{K_TRN * WALK_BUS_TIME)}\\ + (\text{COEFF_COST} * AUTOCOST * DISTANCE)\end{split}\]</span></p>
 </div>
 </div>
 <div id="demonstration-model-framework" class="section level2">
-<h2><span class="header-section-number">3.2</span> Demonstration Model Framework</h2>
-<p>Figure 1 shows a schematic of the model framework.
-<img src="images/model_framework.png" width="540" /></p>
-<p>The framework has three main inputs:<br />
+<h2><span class="header-section-number">3.3</span> Demonstration Model Framework</h2>
+<p>Figure <a href="#fig:modelfrmwrk"><strong>??</strong></a> shows a schematic of the model framework as originally proposed. This framework closely matches that of existing destination choice models.</p>
+<p><img src="images/model_framework.png" width="540" /></p>
+<p>The framework has three main inputs:
 A. Highway Network: The USTM model network was obtained from UDOT and forms the basis of the model.
 B. Productions: Zonal trip productions from the USTM model<br />
 C. Attractions: Zonal trip attractions from the USTM model</p>
@@ -975,12 +1002,12 @@ C. Attractions: Zonal trip attractions from the USTM model</p>
 <p>The outputs are then combined to create a single file with all of the destination choice log sum accessibility outputs. The final output of the model is the destination choice log sum, shown as an individual rowsum for each trip purpose.</p>
 </div>
 <div id="simulating-a-broken-link-within-the-demonstration-model" class="section level2">
-<h2><span class="header-section-number">3.3</span> Simulating a Broken Link Within the Demonstration Model</h2>
+<h2><span class="header-section-number">3.4</span> Simulating a Broken Link Within the Demonstration Model</h2>
 <p>We conducted a sensitivity analysis where we simulated a broken highway link in our demonstration model to verify that the model was responding in an appropriate way. Figure 4 shows the change in the log sum value for each purpose resulting from breaking a single highway link across all trip purposes. In order to simulate the changes caused by a broken link, a link was removed from the network file; the model then uses updated highway travel times to compute the mode and destination choice log sums. In general, the change in log sums shows a reasonable response, but the link selected is a major facility for travel in all directions through Roanoke. We are currently investigating whether these unexpected results are the result of improper specification, or whether they reveal a genuine nuance within this particular application technique.</p>
 <p><img src="images/absolute_error_choropleth" /><!-- --></p>
 </div>
 <div id="identifying-vulnerable-links" class="section level2">
-<h2><span class="header-section-number">3.4</span> Identifying Vulnerable Links</h2>
+<h2><span class="header-section-number">3.5</span> Identifying Vulnerable Links</h2>
 <p>It is necessary for us to identify links in the UTSM network whose breaks we could simulate in our analysis. The AEM (2017) study inspiring this current work identified nine physical threat categories and locations of elevated risk to highway facilities on the I-15 corridor; the present analysis requires that we identify highway links at risk anywhere in Utah, and thus cannot rely only on the identification completed by AEM. An alternative method to identifying links vulnerable to specific risks would be to simply make arbitrary cuts in the network at locations the TAC identifies that could be representative of unknown threats or suspected choke points in the USTM network. The Risk Priority Analysis completed by BIO-WEST (2020) shows Composite Threat Probability by Road Segment. We used this analysis to identify 40 locations in the UTSM network that are either posed with an elevated annual threat or identified as a choke point. We also desired to have a mix of urban and rural facilities to demonstrate the potential flexibility of our proposed technique.</p>
 <p><img src="images/risky_links.png" width="316" /></p>
 
