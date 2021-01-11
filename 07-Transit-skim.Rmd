@@ -1,0 +1,25 @@
+---
+title: "Untitled"
+author: "Max Barnes"
+date: "1/1/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library("foreign")
+library("leaflet")
+library("knitr")
+library("sf")
+library("dplyr")
+library("sp")
+```
+
+```{r}
+data <- read.csv("Data/USTM_transit_skim.csv")
+
+
+
+write.table(data, "Data/USTM_new_transit_skim.csv", row.names = F, col.names =  F, sep = ",")
+```
+
+
