@@ -10,7 +10,7 @@ library("modelr")
 library("SimDesign")
 library("knitr")
 ```
-# resiliency visualizations
+# Roanoke visualizations
 
 In the following DCLS analysis and comparison between an original, fully functioning network and a broken network, one intersection was removed from the network, meaning no vehicles could traverse the area as usual. The intersection of Melrose Ave and Peters Creek Rd. Both links appear to be major routes, with 2 lanes traveling in all directions, and a signalized intersection used for traffic control. The intersections is surrounded by small businesses and a small shopping complex, that appears to be in the style of a strip mall, and there are neighborhoods in the vicinity. 
 
@@ -21,9 +21,9 @@ The input data included in this analysis are both the whole and altered network 
 # The first data set is the whole network named WHOLE_ROWSUMS.DBF
 # The second data set is 01_ROWSUMS.DBF, which should be taken
 # from the CUBE model each time a new iteration is run
-whole_rowsum <- read.dbf("Data/WHOLE_ROWSUMS.DBF")  #original unbroken network
-broken_rowsum <- read.dbf("Data/01_ROWSUMS.DBF")    #altered broken network
-map <- st_read("Data/RoanokeTAZ.shp")               #load shapefile
+whole_rowsum <- read.dbf("data/WHOLE_ROWSUMS.DBF")  #original unbroken network
+broken_rowsum <- read.dbf("data/01_ROWSUMS.DBF")    #altered broken network
+map <- st_read("data/RoanokeTAZ.shp")               #load shapefile
 ```
 
 An initial difference comparison was run on the data to determine the number of changes, if any, that were produced by cutting a link in the model. For this comparison, there are `r n.diffs(comparedf(whole_rowsum, broken_rowsum))` differences between the original data set and the new data with a cut link. Lets compare several different methods to visualize the differences in DCLS created by the model because there were several hundred differences. Visualizing the data will help to better understand some of the impacts that a reduction in network function can have on the immediate and distant vicinity of the network disruption.  
@@ -188,7 +188,7 @@ LNHBC has an overall RMSE range of `r 64.12083 - 64.11984`, LNHBO has a range of
 The following is a visualization of the original DCLS values resulting from the broken link. This interactive map will display the home-based work attribute according to the TAZ that the mouse is currently hovering over. Ideally, the choropleth would change based on a desired trip purpose, however achieving this functionality was not possible at this time. Displaying each of the values for each TAZ was possible, but this was not implemented to avoid confusion with the displayed coloring based on only one of the data sets. It is worth noting, however, that an attempt was made to achieve this functionality and to be able to display a legend that adopted the desired color scheme, however this was also abandoned due to time constraints toward the end of the submission deadline. 
 
 ```{r map, echo = FALSE, message = FALSE}
-map <- st_read("Data/RoanokeTAZ.shp")    
+map <- st_read("data/RoanokeTAZ.shp")    
 map <- st_transform(map, CRS("+proj=longlat +ellps=GRS80"))
 
 labels <- sprintf(

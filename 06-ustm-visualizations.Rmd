@@ -1,28 +1,227 @@
----
-title: "06-ustm-visualizations"
-output: html_document
----
-
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+library("arsenal")
+library("tidyr")
+library("tidyverse")
+library("sf")
+library("leaflet")
+library("foreign")
+library("maptools")
+library("modelr")
+library("SimDesign")
+library("knitr")
+```
+# USTM resiliency visualizations
+
+In the following DCLS analysis and comparison between an original, fully functioning network and a broken network, one intersection was removed from the network, meaning no vehicles could traverse the area as usual. The intersection of Melrose Ave and Peters Creek Rd. Both links appear to be major routes, with 2 lanes traveling in all directions, and a signalized intersection used for traffic control. The intersections is surrounded by small businesses and a small shopping complex, that appears to be in the style of a strip mall, and there are neighborhoods in the vicinity. 
+
+The input data included in this analysis are both the whole and altered network DCLS outputs, as well as a shapefile map of the Roanoke, VA, area. The model was initially run on this dummy network because it is much smaller (with 267 TAZ's, compared to USTM's 8700 TAZ's) and can run a full analysis from beginning to end in about 20-30 seconds. This allows the model to be created quickly, because bugs can be found more effectively. 
+
+```{r initial loading, results = 'hide'}
+# Loading two data sets and a base map from the data folder
+# The first data set is the whole network named WHOLE_ROWSUMS.DBF
+# The second data set is 01_ROWSUMS.DBF, which should be taken
+# from the CUBE model each time a new iteration is run
+ustm_whole_rowsum <- read.dbf("data/01_ROWSUMS_TEMP_WHOLE.DBF")  #original unbroken network
+ustm_broken_rowsum <- read.dbf("data/01_ROWSUMS_TEMP_50.DBF")    #altered broken network
+ustm_map <- st_read("data/TAZ_WF_USTM/TAZ.shp")               #load shapefile
 ```
 
-## R Markdown
+An initial difference comparison was run on the data to determine the number of changes, if any, that were produced by cutting a link in the model. For this comparison, there are `r n.diffs(comparedf(whole_rowsum, broken_rowsum))` differences between the original data set and the new data with a cut link. Lets compare several different methods to visualize the differences in DCLS created by the model because there were several hundred differences. Visualizing the data will help to better understand some of the impacts that a reduction in network function can have on the immediate and distant vicinity of the network disruption.  
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r include = FALSE}
+# Create rowsum_map object and plot the HBW map and data
+# for initial visualization
+ustm_rowsum_map <- left_join(ustm_map, ustm_broken_rowsum, by = c("TAZID" = "TAZ"))
+plot(ustm_rowsum_map[, "LNHBW"])
+plot(ustm_whole_rowsum[, "LNHBW"])
 ```
 
-## Including Plots
+In the following plots, we see several different sets of code and outputs that compare the original functional network to a network with a cut link. Each plot shows a measure of the differences using a different mathematical comparison. A brief commentary, which will highlight changes between plots, if any, will be provided. An additional summary of total RMSE calculations will also be provided.
+.
+```{r difference}
+# Create plot that compares the before and after 5 trip purposes using
+# a simple difference calculation
+ustm_change_broken1 <- list(
+  "Original" = ustm_whole_rowsum,
+  "Broken Link" = ustm_broken_rowsum
+  ) %>%
+  bind_rows(.id = "Scenario") %>%
+  as_tibble() %>%
+  gather("purpose", "logsum", -Scenario, -TAZ) %>%
+  spread(Scenario, logsum, fill = NA) %>%
+  mutate(
+    difference = (`Broken Link` - Original)
+  ) %>%
+  select(TAZ, purpose, difference) %>%
+  spread(purpose, difference, NA)
 
-You can also embed plots, for example:
+# Stitching data together
+ustm_broken_map <- left_join(ustm_map, ustm_change_broken1, by = c("TAZID" = "TAZ"))
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+# Create choropleth with 5 trip purposes
+plot(ustm_broken_map[, c("LNHBO", "LNHBW", "LNREC", "LNHBC", "LNNHB")])
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+The differences between the simple difference plot and the absolute error plot are that all values must be positive in the absolute error comparison. This simply changes the color scheme of the output plots. Coincidentally, this makes it easier to interpret the plots visually. This is a useful change to the information. 
+
+```{r absolute error comparison}
+# Create plot that compares the before and after 5 trip purposes using
+# an absolute error calculation
+ustm_change_broken2 <- list(
+  "Original" = ustm_whole_rowsum,
+  "Broken Link" = ustm_broken_rowsum
+  ) %>%
+  bind_rows(.id = "Scenario") %>%
+  as_tibble() %>%
+  gather("purpose", "logsum", -Scenario, -TAZ) %>%
+  spread(Scenario, logsum, fill = NA) %>%
+  mutate(
+    difference = (abs(`Broken Link` - Original))
+  ) %>%
+  select(TAZ, purpose, difference) %>%
+  spread(purpose, difference, NA)
+
+# Stitching data together
+ustm_broken_map <- left_join(ustm_map, ustm_change_broken2, by = c("TAZID" = "TAZ"))
+
+# Create choropleth with 5 trip purposes
+plot(ustm_broken_map[, c("LNHBO", "LNHBW", "LNREC", "LNHBC", "LNNHB")])
+```
+
+The next two plots show the results using an RMSE and mean absolute error calculation (MAE). MAE measures the average magnitude of the error in a data set, without considering direction. The MAE plot shows the average over the test sample of the absolute differences between prediction and actual observation where all observations are weighted equally. The RMSE function is valuable because of the quadratic nature with which it measures the average magnitude of error in the data. RMSE shows the square root of the average squared difference between estimated and actual data.
+
+```{r RMSE}
+# Create plot that compares the before and after 5 trip purposes using
+# an RMSE calculation
+ustm_change_broken3 <- list(
+  "Original" = ustm_whole_rowsum,
+  "Broken Link" = ustm_broken_rowsum
+  ) %>%
+  bind_rows(.id = "Scenario") %>%
+  as_tibble() %>%
+  gather("purpose", "logsum", -Scenario, -TAZ) %>%
+  spread(Scenario, logsum, fill = NA) %>%
+  mutate(
+    difference = sqrt(((Original - `Broken Link`)^2)/nrow(ustm_whole_rowsum))
+  ) %>%
+  select(TAZ, purpose, difference) %>%
+  spread(purpose, difference, NA)
+
+# Stitching data together
+ustm_broken_map <- left_join(ustm_map, ustm_change_broken3, by = c("TAZID" = "TAZ"))
+
+# Create choropleth with 5 trip purposes
+plot(ustm_broken_map[, c("LNHBO", "LNHBW", "LNREC", "LNHBC", "LNNHB")])
+```
+
+```{r MAE}
+# Create plot that compares the before and after 5 trip purposes using
+# an MAE calculation
+ustm_change_broken4 <- list(
+  "Original" = ustm_whole_rowsum,
+  "Broken Link" = ustm_broken_rowsum
+  ) %>%
+  bind_rows(.id = "Scenario") %>%
+  as_tibble() %>%
+  gather("purpose", "logsum", -Scenario, -TAZ) %>%
+  spread(Scenario, logsum, fill = NA) %>%
+  mutate(
+    difference = (abs(`Broken Link` - Original)/nrow(ustm_whole_rowsum))
+  ) %>%
+  select(TAZ, purpose, difference) %>%
+  spread(purpose, difference, NA)
+
+# Stitching data together
+ustm_broken_map <- left_join(ustm_map, ustm_change_broken4, by = c("TAZID" = "TAZ"))
+
+# Create choropleth with 5 trip purposes
+plot(ustm_broken_map[, c("LNHBO", "LNHBW", "LNREC", "LNHBC", "LNNHB")])
+```
+
+Mean absolute percentage error (MAPE) is a measure of the prediction accuracy used in statistical analysis. MAPE is typically used as a loss function in regression analysis and in model evaluation. This is because it is good at interpreting relative error. The MAPE plot, when compared with the MAE plot, shows more variation in change measurement. That is, it provides what appears to be a more detailed plot with increased color variations. This can specifically be seen to the south of the city center area. One drawback to using MAPE, is that all calculations are weighted equally, so there is no way to differentiate between important and unimportant. 
+
+```{r mean absolute percentage error}
+# Create plot that compares the before and after 5 trip purposes using
+# an mean absolute percentage calculation
+ustm_change_broken5 <- list(
+  "Original" = ustm_whole_rowsum,
+  "Broken Link" = ustm_broken_rowsum
+  ) %>%
+  bind_rows(.id = "Scenario") %>%
+  as_tibble() %>%
+  gather("purpose", "logsum", -Scenario, -TAZ) %>%
+  spread(Scenario, logsum, fill = NA) %>%
+  mutate(
+    difference = (abs((Original - `Broken Link`)/`Broken Link`))*(1/nrow(ustm_whole_rowsum))
+  ) %>%
+  select(TAZ, purpose, difference) %>%
+  spread(purpose, difference, NA)
+
+# Stitching data together
+ustm_broken_map <- left_join(ustm_map, ustm_change_broken5, by = c("TAZID" = "TAZ"))
+
+# Create choropleth with 5 trip purposes
+plot(ustm_broken_map[, c("LNHBO", "LNHBW", "LNREC", "LNHBC", "LNNHB")])
+```
+
+Now that we have reviewed all the different ways to measure the differences between the original and altered network destination choice logusms, we will view the overall RMSE value for each trip purpose from each of the comparisons. 
+
+```{r overall comparison}
+## Total RMSE between full model and difference comparison
+kable(RMSE(ustm_change_broken1, parameter = ustm_whole_rowsum, type = "RMSE"))
+## Total RMSE between full model and absolute error comparison
+kable(RMSE(ustm_change_broken2, parameter = ustm_whole_rowsum, type = "RMSE"))
+## Total RMSE between full model and RMSE comparison
+kable(RMSE(ustm_change_broken3, parameter = ustm_whole_rowsum, type = "RMSE"))
+## Total RMSE between full model and mean absolute error comparison
+kable(RMSE(ustm_change_broken4, parameter = ustm_whole_rowsum, type = "RMSE"))
+## Total RMSE between full model and mean absolute percentage comparison
+kable(RMSE(ustm_change_broken5, parameter = ustm_whole_rowsum, type = "RMSE"))
+```
+
+From the RMSE calculation results, we can see that each of the previous methods used to determine differences between the orignal data and the altered data vary slightly. For example, in the LNHBC term, the RMSE values differ slightly, ranging from 64.11984 to 64.12083, with absolute error returning a smaller value than each of the other methods, and the simple difference comparison returning a larger value. Interestingly, for LNHBC, the MAE and MAPE are identical at 64.12033. Similar trends follow for LNHBO, LNHB, and LNREC. LNHBW has a smallest overall RMSE value when absolute error is  used, and a largest overall RMSE value when MAPE is used. The values for LNHBW range from 62.6392 to 62.72442. LNNHB similarly reports a lowest overall RMSE value when absolute error is used, however, the reported largest overall RMSE value is the same for MAE and MAPE, with a range from 63.06703 to 63.06791.
+
+LNHBC has an overall RMSE range of `r 64.12083 - 64.11984`, LNHBO has a range of just `r 64.47364 - 64.47250`, LNHBW a range of `r 62.72442 - 62.63952`, LNNHB a range of `r 63.06791 - 63.06703`, and LNREC a range of `r 63.41272 - 63.41139`. The trip purpose with the smallest overall RMSE range is LNHBC, while LNHBW has the highest RMSE range with 0.0849. THis indicates that LNHBW is the tirp purpose most negatively effected by the link break done for this analysis, as reported previously. LNHBC was the trip purpsoe with the highest level of resilience for this particular scenario. 
+
+
+## Leaflet Visualization
+The following is a visualization of the original DCLS values resulting from the broken link. This interactive map will display the home-based work attribute according to the TAZ that the mouse is currently hovering over. Ideally, the choropleth would change based on a desired trip purpose, however achieving this functionality was not possible at this time. Displaying each of the values for each TAZ was possible, but this was not implemented to avoid confusion with the displayed coloring based on only one of the data sets. It is worth noting, however, that an attempt was made to achieve this functionality and to be able to display a legend that adopted the desired color scheme, however this was also abandoned due to time constraints toward the end of the submission deadline. 
+
+
+```{r map, echo = FALSE, message = FALSE}
+ustm_map <- st_read("data/TAZ_WF_USTM/TAZ.shp")    
+ustm_map <- st_transform(ustm_map, CRS("+proj=longlat +datum=WGS84"))
+
+labels <- sprintf(
+  "<strong>%s</strong><br/>%g Destination Choice Logsum",
+  ustm_broken_rowsum$TAZ, ustm_broken_rowsum$LNHBW
+) %>% lapply(htmltools::HTML)
+
+m <- leaflet() %>% setView(lng = -111.69138, lat = 40.78847, zoom = 7) %>% addTiles() %>%
+  addPolygons(data=ustm_map,weight=1,col = 'black',smoothFactor = 0.5,
+    opacity = 1.0, fillOpacity = 1,fillColor = ~colorQuantile("Blues", ustm_broken_rowsum$LNHBW)(ustm_broken_rowsum$LNHBW),
+    highlightOptions = highlightOptions(color = "orange", weight = 3,
+      bringToFront = TRUE),
+    label = labels,
+  labelOptions = labelOptions(
+    style = list("font-weight" = "normal", padding = "3px 8px"),
+    textsize = "15px",
+    direction = "auto"))
+m
+```
+
+## USTM Break 50
+```{r map, echo = FALSE, message = FALSE}
+ustm_map <- st_read("data/TAZ_WF_USTM/TAZ.shp")    
+ustm_map <- st_transform(ustm_map, CRS("+proj=longlat +datum=WGS84"))
+
+labels <- sprintf(
+  "<strong>%s</strong><br/>%g Destination Choice Logsum",
+  ustm_change_broken1$TAZ, ustm_change_broken1$LNHBW
+) %>% lapply(htmltools::HTML)
+
+m <- leaflet() %>% setView(lng = -111.69138, lat = 40.78847, zoom = 7) %>% addTiles() %>%
+  addPolygons(data=ustm_map,weight=1,col = 'black',smoothFactor = 0.5,
+    opacity = 1.0, fillOpacity = 1,fillColor = ~colorQuantile("Blues", ustm_change_broken1$LNHBW)(ustm_change_broken1$LNHBW))
+m
+```
